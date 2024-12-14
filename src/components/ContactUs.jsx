@@ -1,7 +1,57 @@
-import React from "react";
+import {React,useState} from "react";
+import emailjs from '@emailjs/browser';
+
+
 
 const ContactUs = () => {
-  console.log("Navigating to Contact Us");
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    company: '',
+    message: '',
+  });
+
+  
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+  
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  
+    // Ensure the keys match the placeholders in your EmailJS template
+    const emailData = {
+      from_name: formData.name,       // Matches {{name}}
+      reply_to: formData.email,     // Matches {{email}}
+      phone: formData.phone,     // Matches {{phone}}
+      company: formData.company, // Matches {{company}} if added to template
+      message: formData.message, // Matches {{message}}
+    };
+  
+    // Send email using EmailJS
+    emailjs
+      .send('service_bo4okgc', 'template_ecmn7nk', emailData, 'rUUIpRU0yBIUb2LUX')
+      .then(
+        (result) => {
+          console.log('Email successfully sent!', result.text);
+          alert('Your message has been sent!');
+        },
+        (error) => {
+          console.error('Failed to send email', error.text);
+          alert('Something went wrong, please try again.');
+        }
+      );
+  };
+  
+  
+  
+
+
   return (
     <div className=" min-h-screen flex flex-col items-center cursor-grab"
       style={{
@@ -19,71 +69,82 @@ const ContactUs = () => {
       </div>
 
       {/* Form Section */}
-      <form className="w-full max-w-lg mt-2 mb-10">
-        <div className="flex flex-col space-y-4">
-          {/* Name Input */}
-          <div>
-            <input
-              type="text"
-              placeholder="Name"
-              className="bg-transparent border-b-2 border-gray-900 placeholder-gray-900 focus:outline-none focus:border-blue-500 px-2 py-1 w-full font-semibold"
-            />
-          </div>
+      <form onSubmit={handleSubmit} className="w-full max-w-lg mt-2 mb-10">
+  <div className="flex flex-col space-y-4">
+    {/* Name Input */}
+    <div>
+      <input
+        type="text"
+        name="name"
+        value={formData.name}
+        onChange={handleChange}
+        placeholder="Name"
+        className="bg-transparent border-b-2 border-gray-900 placeholder-gray-900 focus:outline-none focus:border-blue-500 px-2 py-1 w-full font-semibold"
+      />
+    </div>
 
-          {/* Email Input */}
-          <div>
-            <input
-              type="text"
-              placeholder="Email"
-              className="bg-transparent border-b-2 border-gray-900 placeholder-gray-900 focus:outline-none focus:border-blue-500 px-2 py-2 w-full font-semibold"
-            />
-          </div>
+    {/* Email Input */}
+    <div>
+      <input
+        type="email"
+        name="email"
+        value={formData.email}
+        onChange={handleChange}
+        placeholder="Email"
+        className="bg-transparent border-b-2 border-gray-900 placeholder-gray-900 focus:outline-none focus:border-blue-500 px-2 py-2 w-full font-semibold"
+      />
+    </div>
 
-          {/* Phone Input */}
-          <div>
-            <input
-              type="text"
-              placeholder="Phone"
-              className="bg-transparent border-b-2 border-gray-900 placeholder-gray-900 focus:outline-none focus:border-blue-500 px-2 py-2 w-full font-semibold"
-            />
-          </div>
+    {/* Phone Input */}
+    <div>
+      <input
+        type="text"
+        name="phone"
+        value={formData.phone}
+        onChange={handleChange}
+        placeholder="Phone"
+        className="bg-transparent border-b-2 border-gray-900 placeholder-gray-900 focus:outline-none focus:border-blue-500 px-2 py-2 w-full font-semibold"
+      />
+    </div>
 
-          {/* Company Input */}
-          <div>
-            <input
-              type="text"
-              placeholder="Company"
-              className="bg-transparent border-b-2 border-gray-900 placeholder-gray-900 focus:outline-none focus:border-blue-500 px-2 py-2 w-full font-semibold"
-            />
-          </div>
+    {/* Company Input */}
+    <div>
+      <input
+        type="text"
+        name="company"
+        value={formData.company}
+        onChange={handleChange}
+        placeholder="Company"
+        className="bg-transparent border-b-2 border-gray-900 placeholder-gray-900 focus:outline-none focus:border-blue-500 px-2 py-2 w-full font-semibold"
+      />
+    </div>
 
-          {/* Message Input */}
-          <div>
-            <textarea
-              type="text"
-              placeholder="Message"
-              className="bg-transparent border-b-2 border-gray-900 placeholder-gray-900 focus:outline-none focus:border-blue-500 px-2 py-2 w-full font-semibold"
-            />
-          </div>
+    {/* Message Input */}
+    <div>
+      <textarea
+        name="message"
+        value={formData.message}
+        onChange={handleChange}
+        placeholder="Message"
+        className="bg-transparent border-b-2 border-gray-900 placeholder-gray-900 focus:outline-none focus:border-blue-500 px-2 py-2 w-full font-semibold"
+      />
+    </div>
 
-          <div className="flex ">
-            {/* Submit Button */}
-            <button
-              type="submit"
-              className="w-full bg-gray-800 text-white font-bold py-3 rounded-full hover:bg-gray-700 focus:ring-2 focus:ring-blue-500 focus:outline-none"
-            >
-              SEND
-            </button>
+    <div className="flex">
+      <button
+        type="submit"
+        className="w-full bg-gray-800 text-white font-bold py-3 rounded-full hover:bg-gray-700 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+      >
+        SEND
+      </button>
 
-            {/* Privacy Policy */}
-            <p className="text-xs text-gray-500 ml-2">
-              We will process your personal information in accordance with our Privacy Policy. This site is protected by reCAPTCHA and the Google Privacy Policy and Terms of Service apply.
-            </p>
-          </div>
+      <p className="text-xs text-gray-500 ml-2">
+        We will process your personal information in accordance with our Privacy Policy. This site is protected by reCAPTCHA and the Google Privacy Policy and Terms of Service apply.
+      </p>
+    </div>
+  </div>
+</form>
 
-
-        </div>
-      </form>
 
       {/* Footer Section */}
       <div className="w-full bg-[#95B5B6] mt-4 pt-2 relative">

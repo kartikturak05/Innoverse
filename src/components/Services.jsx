@@ -7,6 +7,7 @@ const Services = () => {
             backgroundSize: 'cover', // Ensures the image covers the entire background
             backgroundPosition: 'center', // Centers the image
             backgroundRepeat: 'no-repeat', // Prevents tiling
+             cursor: 'grab'
         }}>
             {/* Heading Section */}
             <div className="text-center mt-10 cursor-grab">
