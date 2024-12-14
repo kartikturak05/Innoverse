@@ -1,7 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'; // Import OrbitControls
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
+
 
 const FullSizeModel = ({ src, width = '600px', height = '350px' }) => {
     const containerRef = useRef(null);
@@ -9,20 +10,45 @@ const FullSizeModel = ({ src, width = '600px', height = '350px' }) => {
     useEffect(() => {
         // Initialize Three.js Scene
         const scene = new THREE.Scene();
-        const camera = new THREE.PerspectiveCamera(30, parseFloat(width) / parseFloat(height), 0.1, 10000);  // Adjusted FOV
-        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
 
-        // Set Renderer Size
+        // Camera setup
+        const camera = new THREE.PerspectiveCamera(35, parseFloat(width) / parseFloat(height), 0.1, 1000);
+        camera.position.set(0, 1, 1);
+
+        // Renderer setup
+        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
         renderer.setSize(parseFloat(width), parseFloat(height));
+        renderer.outputEncoding = THREE.sRGBEncoding;
         containerRef.current.appendChild(renderer.domElement);
 
-        // Lighting
-        const ambientLight = new THREE.AmbientLight(0xffffff, 1);  // White light with full intensity
+        // Lights setup
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.6); // Adjusted intensity for better visibility
         scene.add(ambientLight);
 
-        const directionalLight = new THREE.DirectionalLight(0xffffff, 0.5); // Additional directional light
-        directionalLight.position.set(5, 5, 5); // Position of the light
+        const directionalLight = new THREE.DirectionalLight(0xffffff, 1.5);
+        directionalLight.position.set(5, 5, 5);
+        directionalLight.castShadow = true;
         scene.add(directionalLight);
+
+        // Add a SpotLight to enhance golden highlights
+        const spotLight = new THREE.SpotLight(0xFFD700, 2, 50, Math.PI / 4, 1, 2);
+        spotLight.position.set(0, 5, 10);
+        spotLight.target.position.set(0, 0, 0); // Pointing towards the center of the model
+        spotLight.castShadow = true;
+        scene.add(spotLight);
+
+        // Front lighting: PointLight from front
+        const frontLight = new THREE.PointLight(0xFFD700, 2, 50);
+        frontLight.position.set(0, 2, 3); // Front position, facing the model
+        frontLight.castShadow = true;
+        scene.add(frontLight);
+
+        // Top lighting: SpotLight from above
+        const topLight = new THREE.SpotLight(0xFFD700, 2, 50, Math.PI / 4, 1, 2);
+        topLight.position.set(0, 5, 0); // Top position, facing downwards
+        topLight.target.position.set(0, 0, 0); // Pointing towards the center of the model
+        topLight.castShadow = true;
+        scene.add(topLight);
 
         // Load GLTF Model
         const loader = new GLTFLoader();
@@ -33,155 +59,83 @@ const FullSizeModel = ({ src, width = '600px', height = '350px' }) => {
             (gltf) => {
                 model = gltf.scene;
                 scene.add(model);
-                console.log(model);
 
-                // Center and Scale the Model
-                const box = new THREE.Box3().setFromObject(model);
-                const size = box.getSize(new THREE.Vector3());
-                const center = box.getCenter(new THREE.Vector3());
-                model.position.sub(center); // Center the model
-                model.scale.set(1, 1, 1); // Adjust the scale if needed
-
-                // Set camera position based on the model's bounding box
-                // This ensures the model is always visible when the scene is loaded
-                const maxSize = Math.max(size.x, size.y, size.z);
-                camera.position.set(0, 0, maxSize * 2);  // Zoomed in enough to fit the model within the view
-                // Apply Materials to Model Parts
-                // model.traverse((child) => {
-                //     if (child.isMesh) {
-                        // Check if the child mesh is part of the diamonds
-                        
-                        // if (child.name.toLowerCase().includes('dobj001')) {
-                        //     child.material = new THREE.MeshPhysicalMaterial({
-                        //         color: 0xffffff, // Diamond should be white
-                        //         emissive: 0xffffff,
-                        //         emissiveIntensity: 0.5, // Slight glow for diamonds
-                        //         roughness: 0.1, // Diamonds are smooth
-                        //         metalness: 0.2, // Less metallic
-                        //         transparent: true,
-                        //         opacity: 0.9, // Adds slight transparency
-                        //     });
-                        // }
-                        // if (child.name.toLowerCase().includes('dobj003')) {
-                        //     child.material = new THREE.MeshPhysicalMaterial({
-                        //         color: 0xffffff, // Diamond should be white
-                        //         emissive: 0xffffff,
-                        //         emissiveIntensity: 0.5, // Slight glow for diamonds
-                        //         roughness: 0.1, // Diamonds are smooth
-                        //         metalness: 0.2, // Less metallic
-                        //         transparent: true,
-                        //         opacity: 0.9, // Adds slight transparency
-                        //     });
-                        // }
-                        // if (child.name.toLowerCase().includes('dobj')) {
-                        //     child.material = new THREE.MeshPhysicalMaterial({
-                        //         color:  0.6795424696265424, // Pure white color
-                        //         roughness: 0.01, // Smooth surface
-                        //         metalness: 0.0,  // No metallic effect
-                        //         transparent: true, // Enable transparency
-                        //         opacity: 0.9, // Adjust as needed (closer to 1 is less transparent)
-                        //         transmission: 1.0, // Fully allow light to pass through
-                        //         ior: 2.4, // Index of Refraction for diamond
-                        //         clearcoat: 1.0, // Add a glossy clear coat
-                        //         clearcoatRoughness: 0.01, // Smooth clear coat
-                        //     });
-                        // }else {
-                        //     // For the ring (non-diamond parts)
-                        //     child.material = new THREE.MeshStandardMaterial({
-                        //         color: 0xFFD700, // Gold color
-                        //         emissive: 0xAA7700, // Subtle warm tone for the emissive
-                        //         emissiveIntensity: 0.2, // Reduced intensity for a more natural look
-                        //         roughness: 0.5, // Slightly rough to look realistic
-                        //         metalness: 1, // Fully metallic
-                        //     });
-                        // }
-
-                //         if (child.isMesh && ['dboj001', 'dboj003', 'dboj'].includes(child.name)) {
-                //             console.log(`Diamond mesh found: ${child.name}`);
-                //             child.material = new THREE.MeshPhysicalMaterial({
-                //                 color: 0xffffff,
-                //                 roughness: 0.01,
-                //                 metalness: 0.0,
-                //                 transparent: true,
-                //                 opacity: 0.9,
-                //                 transmission: 1.0,
-                //                 ior: 2.4,
-                //                 envMapIntensity: 1.5,
-                //                 clearcoat: 1.0,
-                //                 clearcoatRoughness: 0.0,
-                //             });
-                //         }
-                //         else {
-                //             // Apply golden material to non-diamond parts
-                //             child.material = new THREE.MeshStandardMaterial({
-                //                 color: 0xFFD700, // Gold color
-                //                 roughness: 0.3,  // Slight roughness for realistic look
-                //                 metalness: 1.0,  // Full metal appearance
-                //                 envMapIntensity: 1.0,
-                //             });
-                //         }
-                //     }
-                // });
-
-
+                // Traverse through model meshes
                 model.traverse((child) => {
                     if (child.isMesh) {
-                        if (['dboj001', 'dboj003', 'dboj'].includes(child.name)) {
-                            child.material = new THREE.MeshPhysicalMaterial({
-                                color: 0xffffff,
-                                roughness: 0.01,
-                                metalness: 0.0,
-                                transparent: true,
-                                opacity: 0.9,
-                                ior: 1.5, // Use a safer IOR
+                        // Log mesh details for debugging
+                        console.log(
+                            `Mesh name: ${child.name}, ` +
+                            `Material color: ${child.material.color.getHex()}, ` +
+                            `Emissive color: ${child.material.emissive.getHex()}, ` +
+                            `Metalness: ${child.material.metalness}, ` +
+                            `Roughness: ${child.material.roughness}, ` +
+                            `Texture map: ${child.material.map ? 'Yes' : 'No'}, ` +
+                            `Normal map: ${child.material.normalMap ? 'Yes' : 'No'}`
+                        );
+
+                        // Dynamically change material based on mesh name
+                        if (child.name.toLowerCase().includes('torus_1')) {
+                            child.material = new THREE.MeshStandardMaterial({
+                                color: 0xFFD700, // Golden color for Torus_1
+                                roughness: 0.4,  // Shiny but not overly reflective
+                                metalness: 1.0,  // Full metal for shiny effect
+                                emissive: 0xFFD700, // Emissive golden glow
+                                emissiveIntensity: 0.3, // Intensity of the glow
+                            });
+                        } else if (child.name.toLowerCase().includes('torus_2')) {
+                            child.material = new THREE.MeshStandardMaterial({
+                                color: 0xFFD700, // Gold-like color for Torus_2
+                                metalness: 0.8,
+                                roughness: 0.2,
+                                emissive: 0xFFD700, // Emissive glow for gold
+                                emissiveIntensity: 0.4, // Increased intensity for more glow
+                            });
+                        } else if (child.name.toLowerCase().includes('torus_3')) {
+                            child.material = new THREE.MeshStandardMaterial({
+                                color: 0x404040, // Darker color for Torus_3
+                                metalness: 0.2,
+                                roughness: 0.5,
                             });
                         } else {
+                            // Default material for other meshes
                             child.material = new THREE.MeshStandardMaterial({
-                                                color: 0xFFD700, // Gold color
-                                                roughness: 0.3,  // Slight roughness for realistic look
-                                                metalness: 1.0,  // Full metal appearance
-                                                envMapIntensity: 1.0,
-                                            });
+                                color: 0xC0C0C0,
+                                roughness: 0.5,
+                                metalness: 0.8,
+                            });
                         }
                     }
                 });
-                
-                
 
-                // Set camera position based on the model's bounding box
-                // const maxSize = Math.max(size.x, size.y, size.z);
-                // camera.position.set(0, 0, maxSize * 2); // Zoomed in enough to fit the model within the view
+                // Center and scale the model
+                const box = new THREE.Box3().setFromObject(model);
+                const center = box.getCenter(new THREE.Vector3());
+                model.position.sub(center);
+                model.scale.setScalar(12);
             },
-            (xhr) => {
-                console.log((xhr.loaded / xhr.total) * 100 + '% loaded');
-            },
+            undefined,
             (error) => {
                 console.error('Error loading the model:', error);
             }
         );
 
-        // Add OrbitControls to allow mouse interaction
+        // Add OrbitControls for camera rotation
         const controls = new OrbitControls(camera, renderer.domElement);
         controls.enableDamping = true;
-        controls.dampingFactor = 0.25;
-        controls.enableZoom = true;
 
-        // Animation Loop (with rotation)
+        // Animation loop
         const animate = () => {
             requestAnimationFrame(animate);
-
             if (model) {
-                // Rotate the model (adjust rotation speeds)
-                model.rotation.z += 0.002; // Slow rotation along the Z-axis
-                model.rotation.y += 0.001; // Slight horizontal rotation
+                model.rotation.y += 0.005;
             }
-
             controls.update();
             renderer.render(scene, camera);
         };
         animate();
 
-        // Clean up on unmount
+        // Clean up on component unmount
         return () => {
             renderer.dispose();
             containerRef.current.removeChild(renderer.domElement);
@@ -226,36 +180,73 @@ function Landing() {
     }, []);
 
     return (
-        <div className="mt-12 bg-teal-500 w-full h-auto flex flex-wrap justify-between items-center px-5 py-16">
-            <div className="flex-1 max-w-lg mx-auto px-5">
-                <h1 className="text-white text-5xl font-bold leading-snug">
+        <div
+            className=" w-auto h-auto flex flex-wrap justify-between items-center px-6 py-20 cursor-grab "
+            style={{
+                backgroundImage: "url('/d3.png')",
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+                backgroundRepeat: 'no-repeat',
+            }}
+        >
+            {/* Left Section */}
+            <div className="flex-1 max-w-xl mx-auto px-5">
+                <h1 className="text-white text-6xl font-bold leading-none">
                     VIRTUAL <br />
                     TRY-ON
                 </h1>
-                <p className="text-gray-300 text-lg leading-relaxed mt-2 mb-8">
+                <p className="text-white text-lg font-semibold leading-snug mt-2 mb-8">
                     Powerful tools for creating and distributing lifelike 3D content and AR experiences. Elevate e-commerce, digital marketing, and more to boost engagement and drive sales.
                 </p>
-                <div className="flex justify-center">
-                    <div className="flex items-center bg-blue-100 rounded-full shadow-lg w-full max-w-md p-2">
+                <div className="flex justify-start">
+                    <div className="flex items-center bg-[#384241] rounded-full shadow-lg w-full max-w-md p-2">
                         <input
                             type="email"
                             placeholder="Business e-mail"
                             className="flex-1 bg-white text-gray-700 rounded-full px-4 py-2 outline-none focus:ring-2 focus:ring-blue-300"
                         />
-                        <button className="bg-gray-800 hover:bg-gray-700 text-white font-semibold rounded-full px-6 py-2 ml-3">
-                            Free Trial!
+                        <button className="bg-gray-500 hover:bg-gray-700 text-white font-semibold rounded-full px-6 py-2 ml-3">
+                            DEMO
                         </button>
                     </div>
                 </div>
             </div>
-            <div className="w-full lg:w-1/2 flex justify-center items-center mt-10 lg:mt-0">
+
+            {/* Right Section */}
+            <div className="w-full lg:w-1/2 flex justify-center items-center mt-10 lg:mt-0 relative">
+                {/* 3D Model */}
                 <FullSizeModel
-                    src="/models/ring.glb"
-                    width={screenSize.width < 768 ? '250px' : '600px'}
-                    height={screenSize.width < 768 ? '200px' : '400px'}
+                    src="/models/bangle1.glb"
+                    width={screenSize.width < 768 ? '150px' : '600px'}
+                    height={screenSize.width < 768 ? '100px' : '400px'}
                 />
             </div>
+
+            {/* Materials Section - Positioned After Model */}
+            <div className="absolute right-5 flex flex-col items-center bg-gray-200 rounded-full p-4 shadow-lg">
+                {/* Vertical Text */}
+                <div
+                    className="text-gray-800 font-bold text-sm mb-4"
+                    style={{
+                        writingMode: 'vertical-rl',
+                        transform: 'rotate(0deg)', // Text starts from the top flowing downward
+                        letterSpacing: '3px',
+                    }}
+                >
+                    MATERIALS
+                </div>
+
+                {/* Circles */}
+                <div className="flex flex-col items-center space-y-3">
+                    <div className="w-8 h-8 rounded-full bg-gray-400"></div>
+                    <div className="w-8 h-8 rounded-full bg-orange-300"></div>
+                    <div className="w-8 h-8 rounded-full bg-[#A07850]"></div>
+                </div>
+            </div>
         </div>
+
+
+
     );
 }
 

@@ -44,13 +44,13 @@ const FullSizeModel = ({ src, width = "100%", height = "100%" }) => {
 
                 const maxDimension = Math.max(size.x, size.y, size.z);
                 const scale = Math.min(
-                    (containerRef.current.clientWidth * 0.8) / maxDimension,
-                    (containerRef.current.clientHeight * 0.8) / maxDimension
+                    (containerRef.current.clientWidth * 0.6) / maxDimension, // Reduced scale factor to zoom out
+                    (containerRef.current.clientHeight * 0.6) / maxDimension // Reduced scale factor to zoom out
                 );
-                model.scale.setScalar(scale); // Scale the model to fit 80% of container space
+                model.scale.setScalar(scale); // Scale the model to fit 60% of container space
 
-                const distance = maxDimension * 2.1;
-                camera.position.set(0, distance * 0.5, distance); // Adjust for an upper view
+                const distance = maxDimension * 2.5; // Increase the distance for more zoom out
+                camera.position.set(0, distance * 0.6, distance); // Adjust for a wider view
                 camera.lookAt(0, 0, 0);
             },
             undefined,
@@ -68,7 +68,7 @@ const FullSizeModel = ({ src, width = "100%", height = "100%" }) => {
             requestAnimationFrame(animate);
 
             if (model) {
-                model.rotation.y += 0.007; // Rotate the model
+                model.rotation.y += 0.003; // Slower rotation speed (as before)
             }
 
             controls.update();
@@ -99,13 +99,20 @@ const FullSizeModel = ({ src, width = "100%", height = "100%" }) => {
 };
 
 const CompanyOverview = () => {
-
     return (
-        <div className="bg-gray-50 min-h-screen flex flex-col items-center">
+        <div
+            className="min-h-screen flex flex-col items-center"
+            style={{
+                backgroundImage: "url('/d2.png')",
+                backgroundSize: "cover", // Ensures the image covers the entire background
+                backgroundPosition: "center", // Centers the image
+                backgroundRepeat: "no-repeat", // Prevents tiling
+            }}
+        >
             {/* Heading Section */}
             <div className="mt-10 flex justify-start flex-col items-start w-full pl-60">
-                <h1 className="text-4xl font-bold text-gray-700">Why CONNEX ?</h1>
-                <h1 className="text-4xl font-bold text-gray-700 mt-2">Right Now!</h1>
+                <h1 className="text-6xl font-extrabold text-gray-700">Why CONNEX ?</h1>
+                <h1 className="text-6xl font-extrabold text-gray-700 mt-2">Right Now!</h1>
             </div>
 
             {/* Content Section */}
@@ -113,15 +120,15 @@ const CompanyOverview = () => {
                 {/* Left Side (Mannequin/Image Placeholder) */}
                 <div className="w-full md:w-1/2 flex justify-center items-center">
                     <div
-                        className="model-container sm:w-[250px] md:w-[200px] lg:w-[400px] sm:mt-5 lg:mt-0 mr-10"
+                        className="model-container sm:w-[250px] md:w-[200px] lg:w-[400px] sm:mt-5 lg:mt-0 mr-18"
                         style={{
                             margin: "0 auto",
                         }}
                     >
                         <FullSizeModel
-                            src="/models/watch.glb"
-                            width="300px"   
-                            height="350px"
+                            src="/models/farm_house.glb"
+                            width="400px"
+                            height="400px"
                         />
                     </div>
                 </div>
@@ -154,8 +161,7 @@ const CompanyOverview = () => {
                 </div>
             </div>
         </div>
+    );
+};
 
-    )
-}
-
-export default CompanyOverview
+export default CompanyOverview;
