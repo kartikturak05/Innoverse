@@ -13,7 +13,7 @@ const FullSizeModel = ({ src, width = "100%", height = "100%" }) => {
         containerRef.current.appendChild(renderer.domElement);
 
         const camera = new THREE.PerspectiveCamera(
-            45,
+            70,
             containerRef.current.clientWidth / containerRef.current.clientHeight,
             0.1,
             5000
@@ -49,8 +49,8 @@ const FullSizeModel = ({ src, width = "100%", height = "100%" }) => {
                 );
                 model.scale.setScalar(scale); // Scale the model to fit 60% of container space
 
-                const distance = maxDimension * 2.5; // Increase the distance for more zoom out
-                camera.position.set(0, distance * 0.6, distance); // Adjust for a wider view
+                const distance = maxDimension * 1.8; // Increase the distance for more zoom out
+                camera.position.set(0, distance * 0.2, distance); // Adjust for a wider view
                 camera.lookAt(0, 0, 0);
             },
             undefined,
@@ -150,8 +150,8 @@ const CompanyOverview = () => {
             >
                 <FullSizeModel
                     src="/models/farm_house.glb"
-                    width={screenSize.width < 768 ? '250px' : '450px'}
-                    height={screenSize.width < 768 ? '200px' : '400px'}
+                    width={screenSize.width < 768 ? '280px' : '450px'}
+                    height={screenSize.width < 768 ? '300px' : '400px'}
                 />
             </div>
         </div>

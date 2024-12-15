@@ -181,7 +181,7 @@ function Landing() {
 
     return (
         <div
-            className=" h-auto min-h-screen w-screen cursor-grab b"
+            className=" h-auto  md:h-full lg:h-full w-screen cursor-grab"
             style={{
                 backgroundImage: "url('/d3.png')",
                 backgroundSize: 'cover',
@@ -189,7 +189,7 @@ function Landing() {
                 backgroundRepeat: 'no-repeat',
             }}
         >
-            <div className="flex flex-col sm:flex-row sm:flex-wrap justify-between items-center px-4 sm:px-6 py-10 sm:py-20">
+            <div className="flex flex-col sm:flex-row sm:flex-wrap justify-between items-center px-4 pt-20 sm:px-6 py-10 sm:py-20">
                 {/* Left Section */}
                 <div className="w-full sm:flex-1 max-w-lg mx-auto px-4 sm:px-5 text-center sm:text-left">
                     <h1 className="text-white text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight sm:leading-none mt-5">
@@ -200,23 +200,23 @@ function Landing() {
                         Powerful tools for creating and distributing lifelike 3D content and AR experiences. Elevate e-commerce, digital marketing, and more to boost engagement and drive sales.
                     </p>
                     <div className="flex justify-center sm:justify-start w-full px-4">
-    <div className="flex items-center bg-[#384241] rounded-full shadow-lg w-auto lg:w-full max-w-sm sm:max-w-lg p-2">
-        <input
-            type="email"
-            placeholder="Business e-mail"
-            className="flex-1 bg-white text-gray-700 rounded-full px-3 py-1 sm:px-2 sm:py-2 outline-none focus:ring-2 focus:ring-blue-300 text-sm sm:text-base"
-        />
-        <button className="bg-gray-500 hover:bg-gray-700 text-white font-semibold rounded-full px-3 py-1 sm:px-2 sm:py-1 ml-1 text-sm sm:text-base">
-            DEMO
-        </button>
-    </div>
-</div>
+                        <div className="flex items-center bg-[#384241] rounded-full shadow-lg w-auto lg:w-full max-w-sm sm:max-w-lg p-2">
+                            <input
+                                type="email"
+                                placeholder="Business e-mail"
+                                className="flex-1 bg-white text-gray-700 rounded-full px-3 py-1 sm:px-2 sm:py-2 outline-none focus:ring-2 focus:ring-blue-300 text-sm sm:text-base"
+                            />
+                            <button className="bg-gray-500 hover:bg-gray-700 text-white font-semibold rounded-full px-3 py-1 sm:px-2 sm:py-1 ml-1 text-sm sm:text-base">
+                                DEMO
+                            </button>
+                        </div>
+                    </div>
 
 
                 </div>
                 {/* Right Section */}
                 <div
-                    className="w-full sm:w-1/2 flex justify-center items-center mt-10 sm:mt-0"
+                    className="w-full sm:w-1/2 flex justify-center items-center mt-20 sm:mt-0"
                     style={{
                         display: 'flex',
                         justifyContent: 'center',
