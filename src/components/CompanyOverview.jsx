@@ -99,68 +99,94 @@ const FullSizeModel = ({ src, width = "100%", height = "100%" }) => {
 };
 
 const CompanyOverview = () => {
+     const [screenSize, setScreenSize] = useState({
+            width: window.innerWidth,
+            height: window.innerHeight,
+        });
+    
+        useEffect(() => {
+            const handleResize = () => {
+                setScreenSize({
+                    width: window.innerWidth,
+                    height: window.innerHeight,
+                });
+            };
+    
+            window.addEventListener('resize', handleResize);
+    
+            return () => {
+                window.removeEventListener('resize', handleResize);
+            };
+        }, []);
     return (
         <div
-            className="min-h-screen flex flex-col items-center"
-            style={{
-                backgroundImage: "url('/d2.png')",
-                backgroundSize: "cover", // Ensures the image covers the entire background
-                backgroundPosition: "center", // Centers the image
-                backgroundRepeat: "no-repeat", // Prevents tiling
-            }}
-        >
-            {/* Heading Section */}
-            <div className="mt-10 flex justify-start flex-col items-start w-full pl-60">
-                <h1 className="text-6xl font-extrabold text-gray-700">Why CONNEX ?</h1>
-                <h1 className="text-6xl font-extrabold text-gray-700 mt-2">Right Now!</h1>
-            </div>
+    className="min-h-screen flex flex-col items-center cursor-grab"
+    style={{
+        backgroundImage: "url('/d2.png')",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+    }}
+>
+    {/* Heading Section */}
+    <div className="mt-10 flex flex-col items-start w-full px-4 sm:px-10 lg:px-60">
+        <h1 className="text-3xl sm:text-4xl lg:text-6xl font-extrabold text-gray-700 leading-snug">
+            Why CONNEX?
+        </h1>
+        <h1 className="text-3xl sm:text-4xl lg:text-6xl font-extrabold text-gray-700 mt-2 leading-snug">
+            Right Now!
+        </h1>
+    </div>
 
-            {/* Content Section */}
-            <div className="flex flex-wrap justify-center items-center w-full max-w-6xl mt-10">
-                {/* Left Side (Mannequin/Image Placeholder) */}
-                <div className="w-full md:w-1/2 flex justify-center items-center">
-                    <div
-                        className="model-container sm:w-[250px] md:w-[200px] lg:w-[400px] sm:mt-5 lg:mt-0 mr-18"
-                        style={{
-                            margin: "0 auto",
-                        }}
-                    >
-                        <FullSizeModel
-                            src="/models/farm_house.glb"
-                            width="400px"
-                            height="400px"
-                        />
-                    </div>
-                </div>
-
-                {/* Right Side (Content) */}
-                <div className="w-full md:w-1/2 px-6 mt-8 md:mt-0">
-                    <ul className="space-y-6 text-gray-800">
-                        <li>
-                            <h3 className="text-2xl font-bold">TRY IT ON IN SECONDS</h3>
-                            <p className="text-lg font-medium ">
-                                CONNEX allows your customers to try on products in seconds
-                                without waiting for days!
-                            </p>
-                        </li>
-                        <li>
-                            <h3 className="text-2xl font-bold">ACCURATE, FAST & LIGHTWEIGHT</h3>
-                            <p className="text-lg font-medium ">
-                                CONNEX is proven to be accurate, fast and lightweight virtual
-                                try on, helps you in brand differentiation.
-                            </p>
-                        </li>
-                        <li>
-                            <h3 className="text-2xl font-bold">DOUBLE SALES, HALF RETURNS</h3>
-                            <p className="text-lg font-medium ">
-                                We have been helping global brands to achieve double sales,
-                                triple visitors and half the product returns.
-                            </p>
-                        </li>
-                    </ul>
-                </div>
+    {/* Content Section */}
+    <div className="flex flex-wrap justify-center items-center w-full max-w-6xl mt-10 px-4 sm:px-10">
+        {/* Left Side (Mannequin/Image Placeholder) */}
+        <div className="w-full md:w-1/2 flex justify-center items-center">
+            <div
+                className="model-container mt-5 lg:mt-0"
+                style={{
+                    margin: "0 auto",
+                }}
+            >
+                <FullSizeModel
+                    src="/models/farm_house.glb"
+                    width={screenSize.width < 768 ? '250px' : '450px'}
+                    height={screenSize.width < 768 ? '200px' : '400px'}
+                />
             </div>
         </div>
+
+        {/* Right Side (Content) */}
+        <div className="w-full md:w-1/2 px-4 sm:px-6 mt-8 md:mt-0">
+            <ul className="space-y-6 text-gray-800">
+                <li>
+                    <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold">
+                        TRY IT ON IN SECONDS
+                    </h3>
+                    <p className="text-base sm:text-lg font-medium">
+                        CONNEX allows your customers to try on products in seconds without waiting for days!
+                    </p>
+                </li>
+                <li>
+                    <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold">
+                        ACCURATE, FAST & LIGHTWEIGHT
+                    </h3>
+                    <p className="text-base sm:text-lg font-medium">
+                        CONNEX is proven to be accurate, fast, and lightweight virtual try-on, helping you in brand differentiation.
+                    </p>
+                </li>
+                <li>
+                    <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold">
+                        DOUBLE SALES, HALF RETURNS
+                    </h3>
+                    <p className="text-base sm:text-lg font-medium">
+                        We have been helping global brands achieve double sales, triple visitors, and half the product returns.
+                    </p>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
     );
 };
 

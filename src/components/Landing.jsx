@@ -12,7 +12,7 @@ const FullSizeModel = ({ src, width = '600px', height = '350px' }) => {
         const scene = new THREE.Scene();
 
         // Camera setup
-        const camera = new THREE.PerspectiveCamera(35, parseFloat(width) / parseFloat(height), 0.1, 1000);
+        const camera = new THREE.PerspectiveCamera(30, parseFloat(width) / parseFloat(height), 0.1, 1000);
         camera.position.set(0, 1, 1);
 
         // Renderer setup
@@ -128,7 +128,7 @@ const FullSizeModel = ({ src, width = '600px', height = '350px' }) => {
         const animate = () => {
             requestAnimationFrame(animate);
             if (model) {
-                model.rotation.y += 0.005;
+                model.rotation.y += 0.009;
             }
             controls.update();
             renderer.render(scene, camera);
@@ -181,7 +181,7 @@ function Landing() {
 
     return (
         <div
-            className=" w-auto h-auto flex flex-wrap justify-between items-center px-6 py-20 cursor-grab "
+            className=" h-auto min-h-screen w-screen cursor-grab b"
             style={{
                 backgroundImage: "url('/d3.png')",
                 backgroundSize: 'cover',
@@ -189,61 +189,72 @@ function Landing() {
                 backgroundRepeat: 'no-repeat',
             }}
         >
-            {/* Left Section */}
-            <div className="flex-1 max-w-xl mx-auto px-5">
-                <h1 className="text-white text-6xl font-bold leading-none">
-                    VIRTUAL <br />
-                    TRY-ON
-                </h1>
-                <p className="text-white text-lg font-semibold leading-snug mt-2 mb-8">
-                    Powerful tools for creating and distributing lifelike 3D content and AR experiences. Elevate e-commerce, digital marketing, and more to boost engagement and drive sales.
-                </p>
-                <div className="flex justify-start">
-                    <div className="flex items-center bg-[#384241] rounded-full shadow-lg w-full max-w-md p-2">
-                        <input
-                            type="email"
-                            placeholder="Business e-mail"
-                            className="flex-1 bg-white text-gray-700 rounded-full px-4 py-2 outline-none focus:ring-2 focus:ring-blue-300"
-                        />
-                        <button className="bg-gray-500 hover:bg-gray-700 text-white font-semibold rounded-full px-6 py-2 ml-3">
-                            DEMO
-                        </button>
+            <div className="flex flex-col sm:flex-row sm:flex-wrap justify-between items-center px-4 sm:px-6 py-10 sm:py-20">
+                {/* Left Section */}
+                <div className="w-full sm:flex-1 max-w-lg mx-auto px-4 sm:px-5 text-center sm:text-left">
+                    <h1 className="text-white text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight sm:leading-none mt-5">
+                        VIRTUAL <br />
+                        TRY-ON
+                    </h1>
+                    <p className="text-white text-base sm:text-lg font-semibold leading-snug mt-4 sm:mt-2 mb-6 sm:mb-8">
+                        Powerful tools for creating and distributing lifelike 3D content and AR experiences. Elevate e-commerce, digital marketing, and more to boost engagement and drive sales.
+                    </p>
+                    <div className="flex justify-center sm:justify-start w-full px-4">
+    <div className="flex items-center bg-[#384241] rounded-full shadow-lg w-auto lg:w-full max-w-sm sm:max-w-lg p-2">
+        <input
+            type="email"
+            placeholder="Business e-mail"
+            className="flex-1 bg-white text-gray-700 rounded-full px-3 py-1 sm:px-2 sm:py-2 outline-none focus:ring-2 focus:ring-blue-300 text-sm sm:text-base"
+        />
+        <button className="bg-gray-500 hover:bg-gray-700 text-white font-semibold rounded-full px-3 py-1 sm:px-2 sm:py-1 ml-1 text-sm sm:text-base">
+            DEMO
+        </button>
+    </div>
+</div>
+
+
+                </div>
+                {/* Right Section */}
+                <div
+                    className="w-full sm:w-1/2 flex justify-center items-center mt-10 sm:mt-0"
+                    style={{
+                        display: 'flex',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                    }}
+                >
+                    {/* 3D Model */}
+                    <FullSizeModel
+                        src="/models/bangle1.glb"
+                        width={screenSize.width < 768 ? '200px' : '600px'} // Adjusted for smaller devices
+                        height={screenSize.width < 768 ? '200px' : '400px'}
+                    />
+                </div>
+
+                {/* Materials Section */}
+                <div className="absolute right-2 lg:right-6 md:right-4 bottom-0.5 sm:bottom-auto sm:top-1/4 flex flex-col items-center bg-gray-200 rounded-full p-3 sm:p-4 shadow-lg">
+                    {/* Vertical Text */}
+                    <div
+                        className="text-gray-800 font-bold text-xs sm:text-sm mb-2"
+                        style={{
+                            writingMode: 'vertical-rl',
+                            transform: 'rotate(0deg)', // Text starts from the top flowing downward
+                            letterSpacing: '1px',
+                        }}
+                    >
+                        MATERIALS
+                    </div>
+
+                    {/* Circles */}
+                    <div className="flex flex-col items-center space-y-1 sm:space-y-1">
+                        <div className="w-4 h-4 sm:w-5 sm:h-5 rounded-full bg-gray-400"></div>
+                        <div className="w-4 h-4 sm:w-5 sm:h-5 rounded-full bg-orange-300"></div>
+                        <div className="w-4 h-4 sm:w-5 sm:h-5 rounded-full bg-[#A07850]"></div>
                     </div>
                 </div>
             </div>
-
-            {/* Right Section */}
-            <div className="w-full lg:w-1/2 flex justify-center items-center mt-10 lg:mt-0 relative">
-                {/* 3D Model */}
-                <FullSizeModel
-                    src="/models/bangle1.glb"
-                    width={screenSize.width < 768 ? '150px' : '600px'}
-                    height={screenSize.width < 768 ? '100px' : '400px'}
-                />
-            </div>
-
-            {/* Materials Section - Positioned After Model */}
-            <div className="absolute right-5 flex flex-col items-center bg-gray-200 rounded-full p-4 shadow-lg">
-                {/* Vertical Text */}
-                <div
-                    className="text-gray-800 font-bold text-sm mb-4"
-                    style={{
-                        writingMode: 'vertical-rl',
-                        transform: 'rotate(0deg)', // Text starts from the top flowing downward
-                        letterSpacing: '3px',
-                    }}
-                >
-                    MATERIALS
-                </div>
-
-                {/* Circles */}
-                <div className="flex flex-col items-center space-y-3">
-                    <div className="w-8 h-8 rounded-full bg-gray-400"></div>
-                    <div className="w-8 h-8 rounded-full bg-orange-300"></div>
-                    <div className="w-8 h-8 rounded-full bg-[#A07850]"></div>
-                </div>
-            </div>
         </div>
+
 
 
 
