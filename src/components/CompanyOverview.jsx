@@ -164,7 +164,7 @@ const CompanyOverview = () => {
                         TRY IT ON IN SECONDS
                     </h3>
                     <p className="text-base sm:text-lg font-medium">
-                        CONNEX allows your customers to try on products in seconds without waiting for days!
+                        INNOVERSE allows your customers to try on products in seconds without waiting for days!
                     </p>
                 </li>
                 <li>
@@ -172,7 +172,7 @@ const CompanyOverview = () => {
                         ACCURATE, FAST & LIGHTWEIGHT
                     </h3>
                     <p className="text-base sm:text-lg font-medium">
-                        CONNEX is proven to be accurate, fast, and lightweight virtual try-on, helping you in brand differentiation.
+                        INNOVERSE is proven to be accurate, fast, and lightweight virtual try-on, helping you in brand differentiation.
                     </p>
                 </li>
                 <li>

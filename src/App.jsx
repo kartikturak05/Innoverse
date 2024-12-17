@@ -8,6 +8,9 @@ import ContactUs from './components/ContactUs';
 import CustomCursor from './components/CustomCursor';
 import Model3DPage from './components/Model3DPage';
 import Animation3DPage from './components/Animation3DPage';
+import PrivacyPolicy from './components/PrivacyPolicy';
+import TermsAndConditions from './components/TermsAndConditions';
+import Disclaimer from './components/Disclaimer';
 
 const App = () => {
   return (
@@ -40,6 +43,9 @@ const App = () => {
       {/* Route for the separate page */}
       <Route path="/3DModel" element={<Model3DPage />} />
       <Route path="/3DAnimation" element={<Animation3DPage />} />
+      <Route path="/PrivacyPolicy" element={<PrivacyPolicy />} />
+      <Route path="/TermsAndConditions" element={<TermsAndConditions />} />
+      <Route path="/Disclaimer" element={<Disclaimer />} />
     </Routes>
     </>
   );

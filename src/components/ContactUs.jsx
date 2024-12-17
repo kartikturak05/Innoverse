@@ -1,6 +1,7 @@
 import {React,useState} from "react";
 import emailjs from '@emailjs/browser';
 import ReCAPTCHA from "react-google-recaptcha";
+import { useNavigate } from 'react-router-dom';
 
 const ThankYou = () => {
   return (
@@ -179,10 +180,23 @@ const ContactUs = () => {
 
   const [isEmailSent, setIsEmailSent] = useState(false);
 
+  const navigate = useNavigate();
+  
+    const handlePrivacyClick = () => {
+      navigate('/PrivacyPolicy');  // Navigate to the 3D Model page
+    };
+
+    const handleTermsClick = () => {
+      navigate('/TermsAndConditions');  // Navigate to the 3D Model page
+    };
+
+    const handleDisclaimerClick = () => {
+      navigate('/Disclaimer');  // Navigate to the 3D Model page
+    };
   
   return (
     <div
-  className="min-h-screen flex flex-col items-center"
+  className="min-h-screen flex flex-col items-center cursor-grab"
   style={{
     backgroundImage: "url('/d2.png')",
     backgroundSize: 'cover', // Ensures the image covers the entire background
@@ -214,8 +228,9 @@ const ContactUs = () => {
       <div>
         <h1 className="font-bold text-gray-800 text-lg">Information</h1>
         <ul className="text-gray-700 mt-2">
-          <li>Privacy Policy</li>
-          <li>Press Kit</li>
+          <li onClick={handlePrivacyClick} className="m-1">Privacy Policy</li>
+          <li onClick={handleTermsClick} className="m-1">Terms & Conditions</li>
+          <li onClick={handleDisclaimerClick} className="m-1">Disclaimer</li>
         </ul>
       </div>
 
@@ -236,7 +251,7 @@ const ContactUs = () => {
         <h3 className="font-bold text-gray-800 text-lg">Contact Us</h3>
         <ul className="text-gray-700 mt-2">
           <li>+91 70553 59755</li>
-          <li>Connex India</li>
+          <li>InnoVerse India</li>
           <li>2nd Floor, B 208, Block B, Yojna Vihar, Anand Vihar, Delhi,110092</li>
           <li>metaconnexindia@gmail.com</li>
         </ul>
@@ -245,7 +260,7 @@ const ContactUs = () => {
 
     {/* Copyright Text */}
     <div className="text-center text-gray-700 text-sm mt-4 px-4 pb-4">
-      © 2024 Connex India . All Rights Reserved
+      © 2024 InnoVerse India . All Rights Reserved
     </div>
   </div>
 </div>
