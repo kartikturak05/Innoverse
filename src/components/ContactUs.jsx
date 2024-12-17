@@ -1,9 +1,25 @@
 import {React,useState} from "react";
 import emailjs from '@emailjs/browser';
+import ReCAPTCHA from "react-google-recaptcha";
 
+const ThankYou = () => {
+  return (
+    <div className="text-center mt-20 bg-fuchsia-50 mb-20 p-10">
+      <h1 className="text-4xl font-bold text-green-600">Thank You!</h1>
+      <p className="text-gray-700 mt-4 text-2xl font-medium">
+        Your email has been sent successfully. <br /> We will get back to you shortly.
+      </p>
+    </div>
+  );
+};
 
+const FormSection = ({setIsEmailSent}) => {
 
-const ContactUs = () => {
+  const [verified,setVerified] = useState(false);  // Track email status
+  const [captchaToken, setCaptchaToken] = useState(''); // Captcha token
+  const [formValid, setFormValid] = useState(false); // Overall form validity
+  
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -13,13 +29,36 @@ const ContactUs = () => {
   });
 
   
+  // Track changes in form fields
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
+    setFormData((prev) => {
+      const updatedForm = { ...prev, [name]: value };
+      validateForm(updatedForm); // Validate form after every change
+      return updatedForm;
+    });
   };
+
+  // Validate form fields
+  const validateForm = (data) => {
+    const { name, email, phone, company, message } = data;
+    const isFormFilled =
+      name.trim() !== '' &&
+      email.trim() !== '' &&
+      phone.trim() !== '' &&
+      company.trim() !== '' &&
+      message.trim() !== '';
+    setFormValid(isFormFilled && verified);
+  };
+
+  // Handle reCAPTCHA success
+  const handleCaptcha = (token) => {
+    console.log('reCAPTCHA Token:', token);
+    setCaptchaToken(token);
+    setVerified(true);
+    validateForm(formData); // Revalidate form when captcha is verified
+  };
+
   
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -35,11 +74,12 @@ const ContactUs = () => {
   
     // Send email using EmailJS
     emailjs
-      .send('service_bo4okgc', 'template_ecmn7nk', emailData, 'rUUIpRU0yBIUb2LUX')
+      // .send('service_bo4okgc', 'template_ecmn7nk', emailData, 'rUUIpRU0yBIUb2LUX')
+      .send(import.meta.env.VITE_SERVICEID,import.meta.env.VITE_TEMPLATEID , emailData, import.meta.env.VITE_PUBLICKEY)
       .then(
         (result) => {
           console.log('Email successfully sent!', result.text);
-          alert('Your message has been sent!');
+          setIsEmailSent(true); // Notify parent to replace component
         },
         (error) => {
           console.error('Failed to send email', error.text);
@@ -48,30 +88,9 @@ const ContactUs = () => {
       );
   };
   
-  
-  
 
-
-  return (
-    <div
-  className="min-h-screen flex flex-col items-center cursor-grab"
-  style={{
-    backgroundImage: "url('/d2.png')",
-    backgroundSize: 'cover', // Ensures the image covers the entire background
-    backgroundPosition: 'center', // Centers the image
-    backgroundRepeat: 'no-repeat', // Prevents tiling
-  }}
->
-  {/* Header */}
-  <div className="text-center mt-10">
-    <h1 className="text-5xl font-bold text-gray-800">CONTACT US</h1>
-    <p className="text-gray-900 mt-3 text-2xl mb-2">
-      A member of our team will get back to you shortly.
-    </p>
-  </div>
-
-  {/* Form Section */}
-  <form onSubmit={handleSubmit} className="w-full max-w-lg mt-2 mb-10 px-4 sm:px-6">
+  return <>
+    <form onSubmit={handleSubmit} className="w-full max-w-lg mt-2 mb-10 px-4 sm:px-6">
     <div className="flex flex-col space-y-4">
       {/* Name Input */}
       <div>
@@ -132,10 +151,15 @@ const ContactUs = () => {
         />
       </div>
 
+      <ReCAPTCHA
+      sitekey={import.meta.env.VITE_CAPTCHAKEY}
+      onChange={handleCaptcha}
+      />
+
       <div className="flex flex-col sm:flex-row sm:items-center sm:space-x-4 mt-4">
         <button
           type="submit"
-          className="w-full sm:w-auto bg-gray-800 text-white font-bold py-3 px-6 rounded-full hover:bg-gray-700 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+          className="w-full sm:w-auto bg-gray-800 text-white font-bold py-3 px-6 rounded-full hover:bg-gray-700 focus:ring-2 focus:ring-blue-500 focus:outline-none" disabled={!formValid}
         >
           SEND
         </button>
@@ -146,6 +170,42 @@ const ContactUs = () => {
       </div>
     </div>
   </form>
+  </>
+}
+
+
+
+const ContactUs = () => {
+
+  const [isEmailSent, setIsEmailSent] = useState(false);
+
+  
+  return (
+    <div
+  className="min-h-screen flex flex-col items-center"
+  style={{
+    backgroundImage: "url('/d2.png')",
+    backgroundSize: 'cover', // Ensures the image covers the entire background
+    backgroundPosition: 'center', // Centers the image
+    backgroundRepeat: 'no-repeat', // Prevents tiling
+  }}
+>
+  {/* Header */}
+  <div className="text-center mt-10">
+    <h1 className="text-5xl font-bold text-gray-800">CONTACT US</h1>
+    <p className="text-gray-900 mt-3 text-2xl mb-2">
+      A member of our team will get back to you shortly.
+    </p>
+  </div>
+
+
+   {/* Conditionally Render FormSection or ThankYou */}
+   {!isEmailSent ? (
+        <FormSection setIsEmailSent={setIsEmailSent} />
+      ) : (
+        <ThankYou />
+      )}
+  
 
   {/* Footer Section */}
   <div className="w-full bg-[#95B5B6] mt-4 pt-4 relative">

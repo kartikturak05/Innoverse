@@ -131,7 +131,7 @@ const CompanyOverview = () => {
     {/* Heading Section */}
     <div className="mt-10 flex flex-col items-start w-full px-4 sm:px-10 lg:px-60">
         <h1 className="text-3xl sm:text-4xl lg:text-6xl font-extrabold text-gray-700 leading-snug">
-            Why CONNEX?
+            Why InnoVerse?
         </h1>
         <h1 className="text-3xl sm:text-4xl lg:text-6xl font-extrabold text-gray-700 mt-2 leading-snug">
             Right Now!

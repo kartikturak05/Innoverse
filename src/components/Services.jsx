@@ -1,6 +1,18 @@
 import React from "react";
+import { useNavigate } from 'react-router-dom';
 
 const Services = () => {
+  const navigate = useNavigate();
+
+  const handle3DModelClick = () => {
+    navigate('/3DModel');  // Navigate to the 3D Model page
+  };
+
+  const handle3DServicesClick = () => {
+    navigate('/3DAnimation');  // Navigate to the  3D Animation  page
+  }
+
+
     return (
         <div
   className="min-h-screen flex flex-col items-center cursor-grab"
@@ -35,7 +47,7 @@ const Services = () => {
     </div>
 
     {/* Second Service */}
-    <div className="relative w-full sm:w-[48%] md:w-1/3 bg-white rounded-3xl p-6 flex flex-col items-center cursor-grab">
+    <div className="relative w-full sm:w-[48%] md:w-1/3 bg-white rounded-3xl p-6 flex flex-col items-center cursor-grab" onClick={handle3DModelClick}>
       <video
         autoPlay
         muted
@@ -60,7 +72,7 @@ const Services = () => {
     </div>
 
     {/* Third Service */}
-    <div className="relative w-full sm:w-[48%] md:w-1/3 bg-white rounded-3xl p-6 flex flex-col items-center cursor-grab">
+    <div className="relative w-full sm:w-[48%] md:w-1/3 bg-white rounded-3xl p-6 flex flex-col items-center cursor-grab "onClick={handle3DServicesClick}>
       <h1 className="text-2xl font-bold text-gray-700 mb-3 text-center">
         ARCHITECTURAL 3D SERVICES
       </h1>

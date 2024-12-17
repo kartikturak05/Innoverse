@@ -4,53 +4,26 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 
 
-const FullSizeModel = ({ src, width = '600px', height = '350px' }) => {
+const FullSizeModel = React.memo(({ src, width = '600px', height = '350px' }) => {
     const containerRef = useRef(null);
 
     useEffect(() => {
-        // Initialize Three.js Scene
         const scene = new THREE.Scene();
-
-        // Camera setup
         const camera = new THREE.PerspectiveCamera(30, parseFloat(width) / parseFloat(height), 0.1, 1000);
         camera.position.set(0, 1, 1);
 
-        // Renderer setup
         const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
         renderer.setSize(parseFloat(width), parseFloat(height));
         renderer.outputEncoding = THREE.sRGBEncoding;
-        containerRef.current.appendChild(renderer.domElement);
+        containerRef.current?.appendChild(renderer.domElement);
 
-        // Lights setup
-        const ambientLight = new THREE.AmbientLight(0xffffff, 0.6); // Adjusted intensity for better visibility
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
         scene.add(ambientLight);
 
-        const directionalLight = new THREE.DirectionalLight(0xffffff, 1.5);
+        const directionalLight = new THREE.DirectionalLight(0xffffff, 1.2);
         directionalLight.position.set(5, 5, 5);
-        directionalLight.castShadow = true;
         scene.add(directionalLight);
 
-        // Add a SpotLight to enhance golden highlights
-        const spotLight = new THREE.SpotLight(0xFFD700, 2, 50, Math.PI / 4, 1, 2);
-        spotLight.position.set(0, 5, 10);
-        spotLight.target.position.set(0, 0, 0); // Pointing towards the center of the model
-        spotLight.castShadow = true;
-        scene.add(spotLight);
-
-        // Front lighting: PointLight from front
-        const frontLight = new THREE.PointLight(0xFFD700, 2, 50);
-        frontLight.position.set(0, 2, 3); // Front position, facing the model
-        frontLight.castShadow = true;
-        scene.add(frontLight);
-
-        // Top lighting: SpotLight from above
-        const topLight = new THREE.SpotLight(0xFFD700, 2, 50, Math.PI / 4, 1, 2);
-        topLight.position.set(0, 5, 0); // Top position, facing downwards
-        topLight.target.position.set(0, 0, 0); // Pointing towards the center of the model
-        topLight.castShadow = true;
-        scene.add(topLight);
-
-        // Load GLTF Model
         const loader = new GLTFLoader();
         let model;
 
@@ -58,9 +31,6 @@ const FullSizeModel = ({ src, width = '600px', height = '350px' }) => {
             src,
             (gltf) => {
                 model = gltf.scene;
-                scene.add(model);
-
-                // Traverse through model meshes
                 model.traverse((child) => {
                     if (child.isMesh) {
                         // Log mesh details for debugging
@@ -108,54 +78,34 @@ const FullSizeModel = ({ src, width = '600px', height = '350px' }) => {
                     }
                 });
 
-                // Center and scale the model
                 const box = new THREE.Box3().setFromObject(model);
                 const center = box.getCenter(new THREE.Vector3());
                 model.position.sub(center);
                 model.scale.setScalar(12);
-            },
-            undefined,
-            (error) => {
-                console.error('Error loading the model:', error);
+                scene.add(model);
             }
         );
 
-        // Add OrbitControls for camera rotation
         const controls = new OrbitControls(camera, renderer.domElement);
         controls.enableDamping = true;
 
-        // Animation loop
         const animate = () => {
             requestAnimationFrame(animate);
-            if (model) {
-                model.rotation.y += 0.009;
-            }
+            if (model) model.rotation.y += 0.005;
             controls.update();
             renderer.render(scene, camera);
         };
         animate();
 
-        // Clean up on component unmount
         return () => {
+            controls.dispose();
             renderer.dispose();
-            containerRef.current.removeChild(renderer.domElement);
+            containerRef.current?.removeChild(renderer.domElement);
         };
     }, [src, width, height]);
 
-    return (
-        <div
-            ref={containerRef}
-            style={{
-                width,
-                height,
-                overflow: 'hidden',
-                position: 'relative',
-            }}
-            className="model-container"
-        ></div>
-    );
-};
-
+    return <div ref={containerRef} style={{ width, height }} />;
+});
 
 
 function Landing() {
@@ -183,12 +133,9 @@ function Landing() {
 
     return (
         <div
-            className=" h-auto  md:h-full lg:h-full w-screen cursor-grab"
+            className=" h-auto  md:h-full lg:h-full w-full cursor-grab bg-cover bg-center bg-no-repeat"
             style={{
                 backgroundImage: "url('/d3.png')",
-                backgroundSize: 'cover',
-                backgroundPosition: 'center',
-                backgroundRepeat: 'no-repeat',
             }}
         >
             <div className="flex flex-col sm:flex-row sm:flex-wrap justify-between items-center px-4 pt-20 sm:px-6 py-10 sm:py-20">
@@ -201,8 +148,8 @@ function Landing() {
                     <p className="text-white text-base sm:text-lg font-semibold leading-snug mt-4 sm:mt-2 mb-6 sm:mb-8">
                         Powerful tools for creating and distributing lifelike 3D content and AR experiences. Elevate e-commerce, digital marketing, and more to boost engagement and drive sales.
                     </p>
-                    <div className="flex justify-center sm:justify-start w-full px-4">
-                        <div className="flex items-center bg-[#384241] rounded-full shadow-lg w-auto lg:w-full max-w-sm sm:max-w-lg p-2 ml-10 mr-10">
+                    <div className="flex justify-center sm:justify-start w-auto px-4">
+                        <div className="flex items-center bg-[#384241] rounded-full shadow-lg w-full lg:w-full max-w-sm sm:max-w-lg p-2 ">
     
                             <button typeof='submit' className="flex-1 bg-white text-gray-700 rounded-full px-3 py-1 sm:px-2 sm:py-2 outline-none focus:ring-2 focus:ring-blue-300 text-sm sm:text-bas">
                                BOOK A DEMO
