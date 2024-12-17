@@ -164,6 +164,7 @@ function Landing() {
         height: window.innerHeight,
     });
 
+
     useEffect(() => {
         const handleResize = () => {
             setScreenSize({
@@ -178,6 +179,7 @@ function Landing() {
             window.removeEventListener('resize', handleResize);
         };
     }, []);
+
 
     return (
         <div
@@ -200,14 +202,10 @@ function Landing() {
                         Powerful tools for creating and distributing lifelike 3D content and AR experiences. Elevate e-commerce, digital marketing, and more to boost engagement and drive sales.
                     </p>
                     <div className="flex justify-center sm:justify-start w-full px-4">
-                        <div className="flex items-center bg-[#384241] rounded-full shadow-lg w-auto lg:w-full max-w-sm sm:max-w-lg p-2">
-                            <input
-                                type="email"
-                                placeholder="Business e-mail"
-                                className="flex-1 bg-white text-gray-700 rounded-full px-3 py-1 sm:px-2 sm:py-2 outline-none focus:ring-2 focus:ring-blue-300 text-sm sm:text-base"
-                            />
-                            <button className="bg-gray-500 hover:bg-gray-700 text-white font-semibold rounded-full px-3 py-1 sm:px-2 sm:py-1 ml-1 text-sm sm:text-base">
-                                DEMO
+                        <div className="flex items-center bg-[#384241] rounded-full shadow-lg w-auto lg:w-full max-w-sm sm:max-w-lg p-2 ml-10 mr-10">
+    
+                            <button typeof='submit' className="flex-1 bg-white text-gray-700 rounded-full px-3 py-1 sm:px-2 sm:py-2 outline-none focus:ring-2 focus:ring-blue-300 text-sm sm:text-bas">
+                               BOOK A DEMO
                             </button>
                         </div>
                     </div>
