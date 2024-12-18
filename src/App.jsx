@@ -1,4 +1,4 @@
-import React from 'react';
+import {React,useState,useEffect} from 'react';
 import { Routes, Route } from 'react-router-dom'; // Import Routes and Route
 import Navbar from './components/Navbar';
 import Landing from './components/Landing';
@@ -11,42 +11,46 @@ import Animation3DPage from './components/Animation3DPage';
 import PrivacyPolicy from './components/PrivacyPolicy';
 import TermsAndConditions from './components/TermsAndConditions';
 import Disclaimer from './components/Disclaimer';
+import HomePage from './components/HomePage';
+import Mob from './components/Mob';
+
 
 const App = () => {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    // Function to check screen width
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 600);  // 600px breakpoint for mobile
+    };
+
+    // Initial check on mount
+    handleResize();
+
+    // Add event listener for window resize
+    window.addEventListener('resize', handleResize);
+
+    // Cleanup event listener on unmount
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);  // Empty dependency array to run only once when the component mounts
+
   return (
     <>
-    
       <CustomCursor />
-    <Routes>
-      {/* Route for the main page */}
-      <Route
-        path="/"
-        element={
-          <>
-            <Navbar />
-            <div id="home">
-              <Landing />
-            </div>
-            <div id="company-overview">
-              <CompanyOverview />
-            </div>
-            <div id="services">
-              <Services />
-            </div>
-            <div id="contact-us">
-              <ContactUs />
-            </div>
-          </>
-        }
-      />
+      {isMobile ? <Mob /> : <Navbar />}
+      <Routes>
+        <Route path="/" element={<HomePage />} />
 
-      {/* Route for the separate page */}
-      <Route path="/3DModel" element={<Model3DPage />} />
-      <Route path="/3DAnimation" element={<Animation3DPage />} />
-      <Route path="/PrivacyPolicy" element={<PrivacyPolicy />} />
-      <Route path="/TermsAndConditions" element={<TermsAndConditions />} />
-      <Route path="/Disclaimer" element={<Disclaimer />} />
-    </Routes>
+        {/* Other Pages */}
+        <Route path="/PrivacyPolicy" element={<PrivacyPolicy />} />
+        <Route path="/TermsAndConditions" element={<TermsAndConditions />} />
+        <Route path="/Disclaimer" element={<Disclaimer />} />
+        <Route path="/3DModel" element={<Model3DPage />} />
+        <Route path="/3DAnimation" element={<Animation3DPage />} />
+
+      </Routes>
     </>
   );
 };

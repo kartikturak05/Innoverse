@@ -18,7 +18,7 @@ const FormSection = ({setIsEmailSent}) => {
 
   const [verified,setVerified] = useState(false);  // Track email status
   const [captchaToken, setCaptchaToken] = useState(''); // Captcha token
-  const [formValid, setFormValid] = useState(false); // Overall form validity
+  const [formValid, setFormValid] = useState(false); // Overall form validity  
   
 
   const [formData, setFormData] = useState({
@@ -251,7 +251,7 @@ const ContactUs = () => {
         <h3 className="font-bold text-gray-800 text-lg">Contact Us</h3>
         <ul className="text-gray-700 mt-2">
           <li>+91 70553 59755</li>
-          <li>InnoVerse India</li>
+          <li>InnoVerse</li>
           <li>2nd Floor, B 208, Block B, Yojna Vihar, Anand Vihar, Delhi,110092</li>
           <li>metaconnexindia@gmail.com</li>
         </ul>
@@ -260,7 +260,7 @@ const ContactUs = () => {
 
     {/* Copyright Text */}
     <div className="text-center text-gray-700 text-sm mt-4 px-4 pb-4">
-      © 2024 InnoVerse India . All Rights Reserved
+      © 2024 InnoVerse . All Rights Reserved
     </div>
   </div>
 </div>

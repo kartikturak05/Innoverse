@@ -148,14 +148,14 @@ function Landing() {
                     <p className="text-white text-base sm:text-lg font-semibold leading-snug mt-4 sm:mt-2 mb-6 sm:mb-8">
                         Powerful tools for creating and distributing lifelike 3D content and AR experiences. Elevate e-commerce, digital marketing, and more to boost engagement and drive sales.
                     </p>
-                    <div className="flex justify-center sm:justify-start w-auto px-4">
-                        <div className="flex items-center bg-[#384241] rounded-full shadow-lg w-full lg:w-full max-w-sm sm:max-w-lg p-2 ">
-    
-                            <button typeof='submit' className="flex-1 bg-white text-gray-700 rounded-full px-3 py-1 sm:px-2 sm:py-2 outline-none focus:ring-2 focus:ring-blue-300 text-sm sm:text-bas">
-                               BOOK A DEMO
-                            </button>
+                    <div className="flex justify-center w-full px-4">
+                        <div className="flex items-center bg-[#384241] rounded-full shadow-lg w-fit max-w-sm sm:max-w-lg p-2">
+                            <div className="bg-white text-gray-700 rounded-full px-10 py-4 sm:px-20 sm:py-2 outline-none focus:ring-2 focus:ring-blue-300 text-sm sm:text-lg text-center font-bold">
+                                BOOK A DEMO
+                            </div>
                         </div>
                     </div>
+
 
 
                 </div>
