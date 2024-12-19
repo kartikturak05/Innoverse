@@ -100,7 +100,7 @@ const DateAndTime = ({ formData, setFormData, setStep }) => {
     return (
         <div className="flex justify-center items-center h-screen cursor-grab">
             {/* Outer Container */}
-            <div className="flex flex-col lg:flex-row w-[90%] h-[90%] bg-gray-200 mt-10 lg:mt-20">
+            <div className="flex flex-col lg:flex-row w-[90%] h-[90%] bg-gray-200 mt-10 lg:mt-20 ml-0 lg:ml-40">
                 {/* First Div (Personal Info) */}
                 <div className="w-full lg:w-[30%] bg-slate-100 flex flex-col justify-start items-center p-5 lg:p-10">
                     <h1 className="text-gray-700 font-bold text-xl lg:text-2xl">{formData.name}</h1>
@@ -153,7 +153,7 @@ const DateAndTime = ({ formData, setFormData, setStep }) => {
                         ].map((time) => (
                             <div
                                 key={time}
-                                className="text-blue-500 font-bold text-base lg:text-xl m-2 border-2 border-sky-500 hover:bg-sky-500 hover:text-white p-2 lg:pt-4 lg:pb-4 lg:pl-6 lg:pr-6 cursor-pointer"
+                                className="text-blue-500 font-bold text-base lg:text-xl m-2 border-2 border-sky-500 hover:bg-sky-500 hover:text-white p-4 lg:pt-4 lg:pb-4 lg:pl-20 lg:pr-20 cursor-pointer"
                                 onClick={() => handleTimeSelection(time)}
                             >
                                 {time}
