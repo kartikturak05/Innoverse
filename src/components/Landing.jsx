@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
-
+import { useNavigate } from 'react-router-dom';
 
 const FullSizeModel = React.memo(({ src, width = '600px', height = '350px' }) => {
     const containerRef = useRef(null);
@@ -109,6 +109,7 @@ const FullSizeModel = React.memo(({ src, width = '600px', height = '350px' }) =>
 
 
 function Landing() {
+    const navigate = useNavigate();
     const [screenSize, setScreenSize] = useState({
         width: window.innerWidth,
         height: window.innerHeight,
@@ -130,6 +131,10 @@ function Landing() {
         };
     }, []);
 
+    const handleDemoClick = () => {
+        navigate('/BookDemo');  // Navigate to the 3D Model page
+      };
+
 
     return (
         <div
@@ -150,7 +155,7 @@ function Landing() {
                     </p>
                     <div className="flex justify-center w-full px-4">
                         <div className="flex items-center bg-[#384241] rounded-full shadow-lg w-fit max-w-sm sm:max-w-lg p-2">
-                            <div className="bg-white text-gray-700 rounded-full px-10 py-4 sm:px-20 sm:py-2 outline-none focus:ring-2 focus:ring-blue-300 text-sm sm:text-lg text-center font-bold">
+                            <div onClick={handleDemoClick} className="bg-white text-gray-700 rounded-full px-10 py-4 sm:px-20 sm:py-2 outline-none focus:ring-2 focus:ring-blue-300 text-sm sm:text-lg text-center font-bold">
                                 BOOK A DEMO
                             </div>
                         </div>

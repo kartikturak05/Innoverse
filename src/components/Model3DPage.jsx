@@ -12,10 +12,10 @@ const Model3DPage = () => {
   }}>
       {/* Top Heading */}
       <div className="text-center mb-16 mt-20">
-        <h1 className="text-6xl font-extrabold text-white mb-4">
+        <h1 className="text-3xl lg:text-6xl font-extrabold text-white mb-4">
           Discover the Joy of 3D Printing
         </h1>
-        <p className="text-white mt-2 text-sm max-w-4xl mx-auto font-bold">
+        <p className="text-white mt-2 text-sm  max-w-4xl mx-auto font-bold">
           Bigsurmoon's  interactive and responsive engine is perfectly crafted to
           ensuring sustained audience engagement, create inspiration, educate
           audiences, and drive sales. Craft your visual storytelling to the next
@@ -86,10 +86,10 @@ const Model3DPage = () => {
 
       {/* Bottom Section */}
       <div className="text-center mt-12">
-        <h1 className="text-5xl font-extrabold text-white">
+        <h1 className="lg:text-5xl text-2xl font-extrabold text-white">
           Where Ideas Come to Life
         </h1>
-        <h1 className="text-white text-5xl font-extrabold mt-2">
+        <h1 className="text-white lg:text-5xl text-2xl font-extrabold mt-2">
           in Three Dimensions
         </h1>
       </div>
