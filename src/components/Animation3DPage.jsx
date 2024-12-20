@@ -16,12 +16,25 @@ const Animation3DPage = () => {
           <h1 className="lg:text-6xl text-2xl font-extrabold text-white mb-4">
             Powerful 3D and AR tools <br /> that drive conversion
           </h1>
-          <p className="text-white mt-2 lg:text-sm text-xs max-w-4xl mx-auto font-bold">
-            Bigsurmoon's  interactive and responsive engine is perfectly crafted to
-            ensuring sustained audience engagement, create inspiration, educate
-            audiences, and drive sales. Craft your visual storytelling to the next
-            level.
-          </p>
+          <div className="text-white mt-2 lg:text-sm text-xs max-w-4xl mx-auto font-bold">
+            Architectural 3D services bring architectural designs to life through detailed 3D modelling,
+            rendering, and visualization. These services enable architects, designers, and developers to
+            present realistic representations of projects before construction begins, enhancing
+            communication, reducing design errors, and boosting marketing efforts.
+            <br />
+            <br />
+            Key Offerings:
+            <ul className="list-disc pl-6">
+              <li>3D Modelling: Accurate creation of architectural elements, interiors, and exteriors.</li>
+              <li>3D Rendering: Photorealistic visuals with precise lighting, textures, and materials.</li>
+              <li>3D Walkthroughs & Animations: Interactive tours that showcase spatial design and functionality.</li>
+              <li>Virtual & Augmented Reality Integration: Real-time project visualization for immersive experiences.</li>
+              <li>BIM Integration: Comprehensive models for streamlined project management and coordination.</li>
+            </ul>
+            <br />
+            With Architectural 3D Services, stakeholders gain a clear, compelling vision of their projects,
+            facilitating better decision-making and impactful project presentations.
+          </div>
         </div>
 
         {/* Inner continer */}
@@ -39,15 +52,15 @@ const Animation3DPage = () => {
         </div>
 
         {/* Bottom Section */}
-      <div className="text-center mt-12 flex content-center items-center flex-col ">
-        <h1 className="lg:text-5xl text-3xl  font-extrabold text-white">
-          Precise and detailed visualisation  <br />with Augumented reality
-        </h1>
-        <div className='bg-slate-200 rounded-[40px] p-3 w-36 text-center justify-center mt-10 ' >Learn More</div>
-      </div>
+        <div className="text-center mt-12 flex content-center items-center flex-col ">
+          <h1 className="lg:text-5xl text-3xl  font-extrabold text-white">
+            Precise and detailed visualisation  <br />with Augumented reality
+          </h1>
+          <div className='bg-slate-200 rounded-[40px] p-3 w-36 text-center justify-center mt-10 ' >Learn More</div>
+        </div>
       </div>
     </div>
-      )
+  )
 }
 
-      export default Animation3DPage;
+export default Animation3DPage;

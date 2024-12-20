@@ -31,22 +31,10 @@ const Services = () => {
 
   {/* Services Container */}
   <div className="flex flex-wrap md:flex-nowrap lg:flex-nowrap justify-center w-full max-w-6xl mt-12 gap-6 bg-white p-7 rounded-[40px]">
-    {/* First Service */}
-    <div className="relative w-full sm:w-[48%] md:w-1/3 bg-white rounded-3xl p-6 flex flex-col items-center cursor-grab">
-      <h1 className="text-2xl font-bold text-gray-700 mb-3">AUGMENTED REALITY</h1>
-      <p className="text-gray-900 text-center mb-6 font-semibold">
-        We specialise in the development and deployment of both App-based
-        Augmented Reality (Native AR) and Web-based Augmented Reality (Web AR) experiences.
-      </p>
-      <img
-        src="/image1.png"
-        alt="Augmented Reality"
-        className="w-full h-auto rounded-lg rounded-b-[90px]"
-      />
-      <div className="absolute right-0 top-0 h-full w-[3px] bg-gradient-to-b from-gray-300 to-transparent pointer-events-none"></div>
-    </div>
 
-    {/* Second Service */}
+    
+
+    {/* First Service */}
     <div className="relative w-full sm:w-[48%] md:w-1/3 bg-white rounded-3xl p-6 flex flex-col items-center cursor-grab" onClick={handle3DModelClick}>
       <video
         autoPlay
@@ -71,7 +59,7 @@ const Services = () => {
       <div className="absolute right-0 top-0 h-full w-[3px] bg-gradient-to-t from-gray-300 to-transparent pointer-events-none"></div>
     </div>
 
-    {/* Third Service */}
+    {/* Second Service */}
     <div className="relative w-full sm:w-[48%] md:w-1/3 bg-white rounded-3xl p-6 flex flex-col items-center cursor-grab "onClick={handle3DServicesClick}>
       <h1 className="text-2xl font-bold text-gray-700 mb-3 text-center">
         ARCHITECTURAL 3D SERVICES
@@ -85,6 +73,23 @@ const Services = () => {
         alt="Architectural 3D Services"
         className="w-full h-full rounded-b-[90px]"
       />
+      <div className="absolute right-0 top-0 h-full w-[3px] bg-gradient-to-b from-gray-300 to-transparent pointer-events-none"></div>
+
+    </div>
+
+    {/* Third Service */}
+    <div className="relative w-full sm:w-[48%] md:w-1/3 bg-white rounded-3xl p-6 flex flex-col items-center cursor-grab">
+    <img
+        src="/image1.png"
+        alt="Augmented Reality"
+        className="w-full h-auto rounded-lg rounded-b-[90px]"
+      />
+      <h1 className="text-2xl font-bold text-gray-700 mb-3">AUGMENTED REALITY</h1>
+      <p className="text-gray-900 text-center mb-6 font-semibold">
+        We specialise in the development and deployment of both App-based
+        Augmented Reality (Native AR) and Web-based Augmented Reality (Web AR) experiences.
+      </p>
+      
     </div>
   </div>
 </div>
