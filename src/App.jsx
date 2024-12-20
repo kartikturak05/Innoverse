@@ -13,7 +13,6 @@ import TermsAndConditions from './components/TermsAndConditions';
 import Disclaimer from './components/Disclaimer';
 import HomePage from './components/HomePage';
 import Mob from './components/Mob';
-import BookDemo from './components/BookDemo';
 
 
 const App = () => {
@@ -50,7 +49,7 @@ const App = () => {
         <Route path="/Disclaimer" element={<Disclaimer />} />
         <Route path="/3DModel" element={<Model3DPage />} />
         <Route path="/3DAnimation" element={<Animation3DPage />} />
-        <Route path="/BookDemo" element={<BookDemo/> } />
+  
 
       </Routes>
     </>

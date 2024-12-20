@@ -132,7 +132,9 @@ function Landing() {
     }, []);
 
     const handleDemoClick = () => {
-        navigate('/BookDemo');  // Navigate to the 3D Model page
+        // navigate('/BookDemo');  // Navigate to the 3D Model page
+        window.open("https://calendly.com/connexindia", "_blank");
+        // window.open("https://calendly.com/kartik-turak-cs-ghrce/myevent", "_blank");
       };
 
 
