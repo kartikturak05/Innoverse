@@ -13,6 +13,7 @@ import TermsAndConditions from './components/TermsAndConditions';
 import Disclaimer from './components/Disclaimer';
 import HomePage from './components/HomePage';
 import Mob from './components/Mob';
+import AboutUs from './components/AboutUs';
 
 
 const App = () => {
@@ -47,6 +48,7 @@ const App = () => {
         <Route path="/PrivacyPolicy" element={<PrivacyPolicy />} />
         <Route path="/TermsAndConditions" element={<TermsAndConditions />} />
         <Route path="/Disclaimer" element={<Disclaimer />} />
+        <Route path="/AboutUs" element={<AboutUs />} />
         <Route path="/3DModel" element={<Model3DPage />} />
         <Route path="/3DAnimation" element={<Animation3DPage />} />
   
