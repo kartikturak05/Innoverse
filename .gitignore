@@ -22,5 +22,10 @@ dist-ssr
 *.sln
 *.sw?
 
+public/3DModeling
+public/3DModeling/*
+3DModeling
+
+
 
 .env

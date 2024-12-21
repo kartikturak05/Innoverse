@@ -14,6 +14,7 @@ import Disclaimer from './components/Disclaimer';
 import HomePage from './components/HomePage';
 import Mob from './components/Mob';
 import AboutUs from './components/AboutUs';
+import AugumentedReality from './components/AugumentedReality';
 
 
 const App = () => {
@@ -51,6 +52,7 @@ const App = () => {
         <Route path="/AboutUs" element={<AboutUs />} />
         <Route path="/3DModel" element={<Model3DPage />} />
         <Route path="/3DAnimation" element={<Animation3DPage />} />
+        <Route path="/AugumentedReality" element={<AugumentedReality />} />
   
 
       </Routes>

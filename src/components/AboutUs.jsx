@@ -1,36 +1,95 @@
 import React from "react";
+import { motion } from "framer-motion";
 
 const AboutUs = () => {
   return (
-    <div className="bg-gray-100 p-6 md:p-12 text-gray-800 min-h-screen">
-      <div className="max-w-4xl mx-auto bg-white shadow-lg rounded-lg p-8">
-        <h1 className="text-3xl md:text-4xl font-extrabold text-center mb-6">About Us</h1>
-        <p className="text-gray-600 text-center mb-8">
-          At <span className="font-semibold">Innoverrese</span>, we believe in turning complex ideas into powerful visual stories that are both stunning and simple to understand. That’s the core of our philosophy—<strong>Simple by Choice</strong>. By stripping away unnecessary complexity, we focus on what truly matters: creating meaningful connections between your ideas and your audience.
-        </p>
+    <div className="bg-gradient-to-br from-blue-600 via-purple-600 to-pink-600 min-h-screen flex items-center justify-center cursor-pointer">
+      <div className="max-w-5xl mx-auto bg-white shadow-2xl rounded-3xl p-12 relative overflow-hidden">
+        {/* Decorative Circles */}
+        <div className="absolute top-[-150px] right-[-150px] bg-blue-300 w-96 h-96 rounded-full opacity-40 blur-3xl"></div>
+        <div className="absolute bottom-[-150px] left-[-150px] bg-pink-300 w-96 h-96 rounded-full opacity-40 blur-3xl"></div>
 
-        <h2 className="text-2xl font-bold mb-4">Why Choose Innoverrese?</h2>
-        <p className="text-gray-700 mb-4">
-          We don’t just deliver projects; we craft masterpieces. Our dedication to quality and innovation has earned us a shelf full of awards and global recognition. Media outlets around the world have featured our work, and our collaborations with a diverse array of clients stand as a testament to our versatility and commitment to excellence.
-        </p>
+        {/* Header */}
+        <motion.h1
+          className="text-5xl md:text-6xl font-extrabold text-center text-gray-900 mb-8 mt-8"
+          initial={{ opacity: 0, y: -50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7 }}
+        >
+          About Us
+        </motion.h1>
 
-        <h2 className="text-2xl font-bold mb-4">A Team Like No Other</h2>
-        <p className="text-gray-700 mb-6">
-          We’re not just creators; we’re dreamers, innovators, and storytellers who love what we do. Our team thrives on creativity, pushing the boundaries of technology and imagination to deliver results that are both visually breathtaking and functionally impactful. Collaboration is at the heart of our process—we work closely with you to ensure your message is not only delivered but remembered.
-        </p>
+        {/* Intro Section */}
+        <motion.p
+          className="text-lg md:text-2xl text-gray-700 text-center mb-10"
+          initial={{ opacity: 0, x: -50 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+        >
+          At <span className="font-bold text-purple-700">Innoverrese</span>, we believe in turning complex ideas into powerful visual stories that are both stunning and simple to understand. That’s the core of our philosophy—<span className="font-semibold text-blue-600">Simple by Choice</span>.
+        </motion.p>
 
-        <h2 className="text-2xl font-bold mb-4">Let’s Build Something Extraordinary Together</h2>
-        <p className="text-gray-700 mb-6">
-          Whether you’re a startup looking to make a splash or a global brand aiming to stay ahead, Innoverrese is your partner in innovation. From 3D animations that bring your ideas to life to AR solutions that redefine interaction, we’re here to help you make your mark in a competitive world.
-        </p>
+        {/* Why Choose Section */}
+        <motion.div
+          initial={{ opacity: 0, x: 50 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+        >
+          <h2 className="text-3xl font-bold text-gray-800 mb-6">Why Choose Innoverrese?</h2>
+          <p className="text-gray-600 leading-relaxed mb-6">
+            We don’t just deliver projects; we craft masterpieces. Our dedication to quality and innovation has earned us a shelf full of awards and global recognition. Media outlets around the world have featured our work, and our collaborations with a diverse array of clients stand as a testament to our versatility and commitment to excellence.
+          </p>
+        </motion.div>
 
-        <p className="text-gray-700 mb-6">
-          At Innoverrese, we’re not just creating content—we’re crafting experiences that inspire, engage, and transform. Let’s take your vision to the next dimension.
-        </p>
+        {/* Team Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+        >
+          <h2 className="text-3xl font-bold text-gray-800 mb-6">A Team Like No Other</h2>
+          <p className="text-gray-600 leading-relaxed mb-6">
+            We’re not just creators; we’re dreamers, innovators, and storytellers who love what we do. Our team thrives on creativity, pushing the boundaries of technology and imagination to deliver results that are both visually breathtaking and functionally impactful.
+          </p>
+        </motion.div>
 
-        <p className="text-gray-700 mb-6">
-          <span className="font-semibold">Innoverrese</span> is a 3D Animation and Augmented Reality company. The company was started with the motive of providing services in the field of 3D Animation & Modelling. During Covid, all the education institutions went online. We noticed an opportunity and launched an application for schools for online teaching with the help of 3D Modelling. After the Covid was over, we diversified into other services.
-        </p>
+        {/* Call to Action */}
+        <motion.div
+          initial={{ opacity: 0, y: -50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+        >
+          <h2 className="text-3xl font-bold text-gray-800 mb-6">Let’s Build Something Extraordinary Together</h2>
+          <p className="text-gray-600 leading-relaxed mb-8">
+            Whether you’re a startup looking to make a splash or a global brand aiming to stay ahead, Innoverrese is your partner in innovation. From 3D animations that bring your ideas to life to AR solutions that redefine interaction, we’re here to help you make your mark in a competitive world.
+          </p>
+        </motion.div>
+
+        {/* Vision Section */}
+        <motion.p
+          className="text-gray-600 leading-relaxed mb-8"
+          initial={{ opacity: 0, x: -50 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+        >
+          At <span className="font-bold text-purple-700">Innoverrese</span>, we’re not just creating content—we’re crafting experiences that inspire, engage, and transform. Let’s take your vision to the next dimension.
+        </motion.p>
+
+        {/* Background Information */}
+        <motion.p
+          className="text-gray-600 leading-relaxed"
+          initial={{ opacity: 0, x: 50 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+        >
+          <span className="font-bold text-blue-600">Innoverrese</span> is a 3D Animation and Augmented Reality company. We noticed an opportunity during Covid and launched an application for schools for online teaching with the help of 3D Modelling. After the pandemic, we diversified into other services, continuing to innovate and adapt.
+        </motion.p>
       </div>
     </div>
   );

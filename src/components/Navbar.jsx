@@ -23,6 +23,10 @@ const Navbar = () => {
     }
   };
 
+  const handleAboutUs = ()=>{
+    navigate("/AboutUs")
+  }
+
   return (
     <nav className="bg-[#384241] text-white cursor-grab fixed w-full z-10">
       <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
@@ -37,12 +41,18 @@ const Navbar = () => {
           </div>
 
           {/* Navigation Links */}
-          <div className="flex space-x-4 sm:space-x-4 md:space-x-8 lg:space-x-12 text-sm sm:text-base md:text-xl lg:text-2xl font-semibold">
+          <div className="flex space-x-4 sm:space-x-4 md:space-x-8 lg:space-x-12 text-sm sm:text-base md:text-lg lg:text-xl font-semibold">
             <a
               className="hover:text-gray-400 cursor-pointer"
               onClick={() => handleNavigation('#home')}
             >
               Home
+            </a>
+            <a
+              className="hover:text-gray-400 cursor-pointer"
+              onClick={() => handleAboutUs('#home')}
+            >
+              About Us
             </a>
             <a
               className="hover:text-gray-400 cursor-pointer"

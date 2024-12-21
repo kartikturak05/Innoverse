@@ -131,7 +131,7 @@ const CompanyOverview = () => {
     {/* Heading Section */}
     <div className="mt-10 flex flex-col items-start w-full px-4 sm:px-10 lg:px-60">
         <h1 className="text-3xl sm:text-4xl lg:text-6xl font-extrabold text-gray-700 leading-snug">
-            Why InnoVerse?
+            Why Innoverrese?
         </h1>
         <h1 className="text-3xl sm:text-4xl lg:text-6xl font-extrabold text-gray-700 mt-2 leading-snug">
             Right Now!
@@ -164,7 +164,7 @@ const CompanyOverview = () => {
                         TRY IT ON IN SECONDS
                     </h3>
                     <p className="text-base sm:text-lg font-medium">
-                        INNOVERSE allows your customers to try on products in seconds without waiting for days!
+                    INNOVERRESE allows your customers to try on products in seconds without waiting for days!
                     </p>
                 </li>
                 <li>
@@ -172,7 +172,7 @@ const CompanyOverview = () => {
                         ACCURATE, FAST & LIGHTWEIGHT
                     </h3>
                     <p className="text-base sm:text-lg font-medium">
-                        INNOVERSE is proven to be accurate, fast, and lightweight virtual try-on, helping you in brand differentiation.
+                    INNOVERRESE is proven to be accurate, fast, and lightweight virtual try-on, helping you in brand differentiation.
                     </p>
                 </li>
                 <li>

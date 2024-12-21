@@ -12,6 +12,9 @@ const Services = () => {
     navigate('/3DAnimation');  // Navigate to the  3D Animation  page
   }
 
+  const handleARClick = () => {
+    navigate('/AugumentedReality')
+  }
 
     return (
         <div
@@ -78,7 +81,7 @@ const Services = () => {
     </div>
 
     {/* Third Service */}
-    <div className="relative w-full sm:w-[48%] md:w-1/3 bg-white rounded-3xl p-6 flex flex-col items-center cursor-grab">
+    <div className="relative w-full sm:w-[48%] md:w-1/3 bg-white rounded-3xl p-6 flex flex-col items-center cursor-grab" onClick={handleARClick}>
     <img
         src="/image1.png"
         alt="Augmented Reality"
