@@ -14,7 +14,7 @@ const Animation3DPage = () => {
         {/* Top Heading */}
         <div className="text-center mb-16 mt-20">
           <h1 className="lg:text-6xl text-2xl font-extrabold text-white mb-4">
-            Powerful 3D and AR tools <br /> that drive conversion
+            Architectural 3D Services  <br /> that drive conversion
           </h1>
           <div className="text-white mt-2 lg:text-sm text-xs max-w-4xl mx-auto font-bold">
             Architectural 3D services bring architectural designs to life through detailed 3D modelling,

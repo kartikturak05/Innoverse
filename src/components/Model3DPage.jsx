@@ -26,7 +26,7 @@ const Model3DPage = () => {
         {/* Top Heading */}
         <div className="text-center mb-16 mt-20">
           <h1 className="text-3xl lg:text-6xl font-extrabold text-white mb-4">
-            Discover the Joy of 3D Printing
+            Discover the Joy of 3D Modeling And Animation
           </h1>
           <p className="text-white mt-2 text-sm  max-w-4xl mx-auto font-bold">
             Our 3D animations are more than just visuals—they are experiences. From dynamic product
