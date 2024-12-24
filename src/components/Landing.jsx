@@ -4,108 +4,152 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { useNavigate } from 'react-router-dom';
 
-const FullSizeModel = React.memo(({ src, width = '600px', height = '350px' }) => {
+const FullSizeModel = ({ src, width = "100%", height = "100%" }) => {
     const containerRef = useRef(null);
+    const modelRef = useRef(null);
+    const initialPositionRef = useRef(null);
 
     useEffect(() => {
         const scene = new THREE.Scene();
-        const camera = new THREE.PerspectiveCamera(30, parseFloat(width) / parseFloat(height), 0.1, 1000);
-        camera.position.set(0, 1, 1);
-
-        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-        renderer.setSize(parseFloat(width), parseFloat(height));
+        const renderer = new THREE.WebGLRenderer({
+            antialias: true,
+            alpha: true, // Enable transparency
+            physicallyCorrectLights: true,
+        });
+        renderer.setSize(containerRef.current.clientWidth, containerRef.current.clientHeight);
+        renderer.toneMapping = THREE.ACESFilmicToneMapping;
+        renderer.toneMappingExposure = 2.0;
         renderer.outputEncoding = THREE.sRGBEncoding;
-        containerRef.current?.appendChild(renderer.domElement);
+        renderer.setClearColor(0x000000, 0); // Set clear color to transparent
+        containerRef.current.appendChild(renderer.domElement);
 
-        const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
+        const camera = new THREE.PerspectiveCamera(
+            70,
+            containerRef.current.clientWidth / containerRef.current.clientHeight,
+            0.1,
+            5000
+        );
+
+        // Lighting setup
+        const ambientLight = new THREE.AmbientLight(0xffffff, 1.5);
         scene.add(ambientLight);
 
-        const directionalLight = new THREE.DirectionalLight(0xffffff, 1.2);
-        directionalLight.position.set(5, 5, 5);
-        scene.add(directionalLight);
+        const pointLight = new THREE.PointLight(0xffffff, 2);
+        pointLight.position.set(5, 10, 5);
+        scene.add(pointLight);
+
+        // Load environment map using equirectangular texture for reflections only
+        const textureLoader = new THREE.TextureLoader();
+        textureLoader.load("/image_7.png", (texture) => {
+            texture.mapping = THREE.EquirectangularReflectionMapping;
+            scene.environment = texture; // Set as the environment map (not the background)
+        });
 
         const loader = new GLTFLoader();
-        let model;
-
         loader.load(
             src,
             (gltf) => {
-                model = gltf.scene;
+                const model = gltf.scene;
+                modelRef.current = model;
+
                 model.traverse((child) => {
                     if (child.isMesh) {
-                        // Log mesh details for debugging
-                        console.log(
-                            `Mesh name: ${child.name}, ` +
-                            `Material color: ${child.material.color.getHex()}, ` +
-                            `Emissive color: ${child.material.emissive.getHex()}, ` +
-                            `Metalness: ${child.material.metalness}, ` +
-                            `Roughness: ${child.material.roughness}, ` +
-                            `Texture map: ${child.material.map ? 'Yes' : 'No'}, ` +
-                            `Normal map: ${child.material.normalMap ? 'Yes' : 'No'}`
-                        );
-
-                        // Dynamically change material based on mesh name
-                        if (child.name.toLowerCase().includes('torus_1')) {
-                            child.material = new THREE.MeshStandardMaterial({
-                                color: 0xFFD700, // Golden color for Torus_1
-                                roughness: 0.4,  // Shiny but not overly reflective
-                                metalness: 1.0,  // Full metal for shiny effect
-                                emissive: 0xFFD700, // Emissive golden glow
-                                emissiveIntensity: 0.3, // Intensity of the glow
-                            });
-                        } else if (child.name.toLowerCase().includes('torus_2')) {
-                            child.material = new THREE.MeshStandardMaterial({
-                                color: 0xFFD700, // Gold-like color for Torus_2
-                                metalness: 0.8,
-                                roughness: 0.2,
-                                emissive: 0xFFD700, // Emissive glow for gold
-                                emissiveIntensity: 0.4, // Increased intensity for more glow
-                            });
-                        } else if (child.name.toLowerCase().includes('torus_3')) {
-                            child.material = new THREE.MeshStandardMaterial({
-                                color: 0x404040, // Darker color for Torus_3
-                                metalness: 0.2,
-                                roughness: 0.5,
-                            });
-                        } else {
-                            // Default material for other meshes
-                            child.material = new THREE.MeshStandardMaterial({
-                                color: 0xC0C0C0,
-                                roughness: 0.5,
-                                metalness: 0.8,
-                            });
-                        }
+                        child.material.needsUpdate = true;
+                        child.material.metalness = 1.0; // Fully metallic
+                        child.material.roughness = 0.05; // Polished, shiny surface
+                        child.material.color.set(0xc0c0c0); // Silver color
+                        child.material.envMapIntensity = 1.5; // Enhance reflections
+                        // Remove transparency to avoid glass-like appearance
+                        child.material.transparent = false;
+                        child.material.opacity = 1.0;
                     }
                 });
 
-                const box = new THREE.Box3().setFromObject(model);
-                const center = box.getCenter(new THREE.Vector3());
-                model.position.sub(center);
-                model.scale.setScalar(12);
                 scene.add(model);
+
+                // Center the model
+                const box = new THREE.Box3().setFromObject(model);
+                const size = box.getSize(new THREE.Vector3());
+                const center = box.getCenter(new THREE.Vector3());
+
+                model.position.sub(center);
+
+                const maxDimension = Math.max(size.x, size.y, size.z);
+                const scale = Math.min(
+                    (containerRef.current.clientWidth * 0.6) / maxDimension,
+                    (containerRef.current.clientHeight * 0.6) / maxDimension
+                );
+                model.scale.setScalar(scale);
+
+                initialPositionRef.current = model.position.clone();
+
+                
+
+                const distance = maxDimension * 2; // Adjust distance as needed
+camera.position.set(0, distance, 0); // Top view: above the model
+camera.lookAt(0, 0, 0); // Focus on the model center
+            },
+            undefined,
+            (error) => {
+                console.error("Error loading model:", error);
             }
         );
 
         const controls = new OrbitControls(camera, renderer.domElement);
         controls.enableDamping = true;
+        controls.dampingFactor = 0.25;
+        controls.enableZoom = true;
 
         const animate = () => {
             requestAnimationFrame(animate);
-            if (model) model.rotation.y += 0.005;
+
+            if (modelRef.current) {
+                modelRef.current.rotation.y += 0.003; // Slow rotation
+            }
+
             controls.update();
             renderer.render(scene, camera);
         };
         animate();
 
-        return () => {
-            controls.dispose();
-            renderer.dispose();
-            containerRef.current?.removeChild(renderer.domElement);
-        };
-    }, [src, width, height]);
+        const handleResize = () => {
+            if (containerRef.current) {
+                const width = containerRef.current.clientWidth;
+                const height = containerRef.current.clientHeight;
 
-    return <div ref={containerRef} style={{ width, height }} />;
-});
+                camera.aspect = width / height;
+                camera.updateProjectionMatrix();
+                renderer.setSize(width, height);
+            }
+        };
+
+        window.addEventListener("resize", handleResize);
+
+        return () => {
+            window.removeEventListener("resize", handleResize);
+            renderer.dispose();
+            if (containerRef.current) {
+                containerRef.current.removeChild(renderer.domElement);
+            }
+        };
+    }, [src]);
+
+    return (
+        <div
+            ref={containerRef}
+            style={{
+                width,
+                height,
+                overflow: "hidden",
+                position: "relative",
+                backgroundColor: "transparent", // Ensure the div background is transparent
+            }}
+        ></div>
+    );
+};
+
+
+
 
 
 function Landing() {
@@ -130,6 +174,8 @@ function Landing() {
             window.removeEventListener('resize', handleResize);
         };
     }, []);
+
+
 
     const handleDemoClick = () => {
         // navigate('/BookDemo');  // Navigate to the 3D Model page
@@ -177,7 +223,7 @@ function Landing() {
                 >
                     {/* 3D Model */}
                     <FullSizeModel
-                        src="/models/bangle1.glb"
+                        src="/models/Untitled.glb"
                         width={screenSize.width < 768 ? '200px' : '600px'} // Adjusted for smaller devices
                         height={screenSize.width < 768 ? '200px' : '400px'}
                     />

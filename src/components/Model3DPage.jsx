@@ -41,7 +41,8 @@ const Model3DPage = () => {
         </div>
 
         {/* Video Container */}
-        <div className="bg-white rounded-[40px] shadow-lg p-10 ">
+        <div className="bg-gradient-to-br from-pink-200 via-green-200 to-blue-200
+ rounded-[40px] shadow-lg p-10 ">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-24">
             {/* Video 1 */}
             <div className="text-center flex-wrap ">
@@ -123,6 +124,53 @@ const Model3DPage = () => {
                 eiusmod tempor incididunt ut labore et dolore magna aliqua.
               </p>
             </div>
+
+
+            {/* Video 5 */}
+            <div className="text-center">
+              <video
+                autoPlay
+                muted
+                loop
+                className="w-full h-[350px] rounded-[40px] mb-4"
+                controls
+                controlsList="nodownload"
+                style={{ pointerEvents: 'auto' }}
+                onContextMenu={(e) => e.preventDefault()}
+              >
+                <source src="/3DModeling/mobile2.mp4" type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+              <h2 className="text-xl font-bold mt-4">VIDEO : 5</h2>
+              <p className="text-gray-900 mt-2 text-sm font-semibold">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua.
+              </p>
+            </div>
+
+            {/* Video 6 */}
+            <div className="text-center">
+              <video
+                autoPlay
+                muted
+                loop
+                className="w-full h-[350px] rounded-[40px] mb-4"
+                controls
+                controlsList="nodownload"
+                style={{ pointerEvents: 'auto' }}
+                onContextMenu={(e) => e.preventDefault()}
+              >
+                <source src="/3DModeling/green_jewellery.mp4" type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+              <h2 className="text-xl font-bold mt-4">VIDEO : 6</h2>
+              <p className="text-gray-900 mt-2 text-sm font-semibold">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua.
+              </p>
+            </div>
+
+
           </div>
         </div>
 
