@@ -4,23 +4,30 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { useNavigate } from 'react-router-dom';
 
-const FullSizeModel = ({ src, width = "100%", height = "100%" }) => {
+const FullSizeModel = ({ src, width = "100%", height = "100%", ringColor }) => {
     const containerRef = useRef(null);
     const modelRef = useRef(null);
-    const initialPositionRef = useRef(null);
+    const rendererRef = useRef(null);
+    const sceneRef = useRef(null);
+    const cameraRef = useRef(null);
 
+    // Initial setup effect
     useEffect(() => {
         const scene = new THREE.Scene();
+        sceneRef.current = scene;
+
         const renderer = new THREE.WebGLRenderer({
             antialias: true,
-            alpha: true, // Enable transparency
+            alpha: true,
             physicallyCorrectLights: true,
         });
+        rendererRef.current = renderer;
+
         renderer.setSize(containerRef.current.clientWidth, containerRef.current.clientHeight);
         renderer.toneMapping = THREE.ACESFilmicToneMapping;
         renderer.toneMappingExposure = 2.0;
         renderer.outputEncoding = THREE.sRGBEncoding;
-        renderer.setClearColor(0x000000, 0); // Set clear color to transparent
+        renderer.setClearColor(0x000000, 0);
         containerRef.current.appendChild(renderer.domElement);
 
         const camera = new THREE.PerspectiveCamera(
@@ -29,8 +36,8 @@ const FullSizeModel = ({ src, width = "100%", height = "100%" }) => {
             0.1,
             5000
         );
+        cameraRef.current = camera;
 
-        // Lighting setup
         const ambientLight = new THREE.AmbientLight(0xffffff, 1.5);
         scene.add(ambientLight);
 
@@ -38,12 +45,14 @@ const FullSizeModel = ({ src, width = "100%", height = "100%" }) => {
         pointLight.position.set(5, 10, 5);
         scene.add(pointLight);
 
-        // Load environment map using equirectangular texture for reflections only
         const textureLoader = new THREE.TextureLoader();
-        textureLoader.load("/image_7.png", (texture) => {
-            texture.mapping = THREE.EquirectangularReflectionMapping;
-            scene.environment = texture; // Set as the environment map (not the background)
-        });
+        const ringTexture = textureLoader.load('/ringbg.png');
+        ringTexture.mapping = THREE.EquirectangularReflectionMapping;
+
+        const diamondTexture = textureLoader.load("/texture/pink/dymond/Material_2_baseColor.png");
+        diamondTexture.mapping = THREE.EquirectangularReflectionMapping;
+
+        scene.environment = ringTexture;
 
         const loader = new GLTFLoader();
         loader.load(
@@ -54,20 +63,37 @@ const FullSizeModel = ({ src, width = "100%", height = "100%" }) => {
 
                 model.traverse((child) => {
                     if (child.isMesh) {
-                        child.material.needsUpdate = true;
-                        child.material.metalness = 1.0; // Fully metallic
-                        child.material.roughness = 0.05; // Polished, shiny surface
-                        child.material.color.set(0xc0c0c0); // Silver color
-                        child.material.envMapIntensity = 1.5; // Enhance reflections
-                        // Remove transparency to avoid glass-like appearance
-                        child.material.transparent = false;
-                        child.material.opacity = 1.0;
+                        // Store the original material type for each mesh
+                        if (child.name.toLowerCase().includes('dymond') ||
+                            child.material.name.toLowerCase().includes('dymond')) {
+                            child.userData.materialType = 'diamond';
+                            child.material = new THREE.MeshPhysicalMaterial({
+                                metalness: 0.3,
+                                roughness: 0.3,
+                                transmission: 1.3,
+                                thickness: 0.5,
+                                envMap: diamondTexture,
+                                envMapIntensity: 2.0,
+                                clearcoat: 1.0,
+                                clearcoatRoughness: 0.1,
+                                ior: 5,
+                                color: 0xffffff
+                            });
+                        } else {
+                            child.userData.materialType = 'ring';
+                            child.material = new THREE.MeshStandardMaterial({
+                                metalness: 1.3,
+                                roughness: 0.09,
+                                envMap: ringTexture,
+                                envMapIntensity: 1.5,
+                                color: ringColor,
+                            });
+                        }
                     }
                 });
 
                 scene.add(model);
 
-                // Center the model
                 const box = new THREE.Box3().setFromObject(model);
                 const size = box.getSize(new THREE.Vector3());
                 const center = box.getCenter(new THREE.Vector3());
@@ -81,13 +107,9 @@ const FullSizeModel = ({ src, width = "100%", height = "100%" }) => {
                 );
                 model.scale.setScalar(scale);
 
-                initialPositionRef.current = model.position.clone();
-
-                
-
-                const distance = maxDimension * 2; // Adjust distance as needed
-camera.position.set(0, distance, 0); // Top view: above the model
-camera.lookAt(0, 0, 0); // Focus on the model center
+                const distance = maxDimension * 2;
+                camera.position.set(0, distance, 0);
+                camera.lookAt(0, 0, 0);
             },
             undefined,
             (error) => {
@@ -102,11 +124,6 @@ camera.lookAt(0, 0, 0); // Focus on the model center
 
         const animate = () => {
             requestAnimationFrame(animate);
-
-            if (modelRef.current) {
-                modelRef.current.rotation.y += 0.003; // Slow rotation
-            }
-
             controls.update();
             renderer.render(scene, camera);
         };
@@ -132,7 +149,25 @@ camera.lookAt(0, 0, 0); // Focus on the model center
                 containerRef.current.removeChild(renderer.domElement);
             }
         };
-    }, [src]);
+    }, [src]); // Keep this dependency array as is
+
+    // Separate effect for color changes
+    useEffect(() => {
+        if (modelRef.current) {
+            modelRef.current.traverse((child) => {
+                if (child.isMesh && child.userData.materialType === 'ring') {
+                    // Update only ring materials
+                    child.material.color.set(ringColor);
+                    child.material.needsUpdate = true;
+                }
+            });
+
+            // Force a render update
+            if (rendererRef.current && sceneRef.current && cameraRef.current) {
+                rendererRef.current.render(sceneRef.current, cameraRef.current);
+            }
+        }
+    }, [ringColor]); // This effect runs when ringColor changes
 
     return (
         <div
@@ -142,7 +177,7 @@ camera.lookAt(0, 0, 0); // Focus on the model center
                 height,
                 overflow: "hidden",
                 position: "relative",
-                backgroundColor: "transparent", // Ensure the div background is transparent
+                backgroundColor: "transparent",
             }}
         ></div>
     );
@@ -158,6 +193,8 @@ function Landing() {
         width: window.innerWidth,
         height: window.innerHeight,
     });
+
+    const [ring, setRing] = useState(0xC0C0C0);
 
 
     useEffect(() => {
@@ -181,77 +218,86 @@ function Landing() {
         // navigate('/BookDemo');  // Navigate to the 3D Model page
         window.open("https://calendly.com/connexindia", "_blank");
         // window.open("https://calendly.com/kartik-turak-cs-ghrce/myevent", "_blank");
-      };
+    };
 
 
     return (
         <div
-            className=" h-auto  md:h-full lg:h-full w-full cursor-grab bg-cover bg-center bg-no-repeat"
-            style={{
-                backgroundImage: "url('/d3.png')",
-            }}
-        >
-            <div className="flex flex-col sm:flex-row sm:flex-wrap justify-between items-center px-4 pt-20 sm:px-6 py-10 sm:py-20">
-                {/* Left Section */}
-                <div className="w-full sm:flex-1 max-w-lg mx-auto px-4 sm:px-5 text-center sm:text-left">
-                    <h1 className="text-white text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight sm:leading-none mt-5">
-                        VIRTUAL <br />
-                        TRY-ON
-                    </h1>
-                    <p className="text-white text-base sm:text-lg font-semibold leading-snug mt-4 sm:mt-2 mb-6 sm:mb-8">
-                        Powerful tools for creating and distributing lifelike 3D content and AR experiences. Elevate e-commerce, digital marketing, and more to boost engagement and drive sales.
-                    </p>
-                    <div className="flex justify-center w-full px-4">
-                        <div className="flex items-center bg-[#384241] rounded-full shadow-lg w-fit max-w-sm sm:max-w-lg p-2">
-                            <div onClick={handleDemoClick} className="bg-white text-gray-700 rounded-full px-10 py-4 sm:px-20 sm:py-2 outline-none focus:ring-2 focus:ring-blue-300 text-sm sm:text-lg text-center font-bold">
-                                BOOK A DEMO
-                            </div>
-                        </div>
-                    </div>
-
-
-
-                </div>
-                {/* Right Section */}
-                <div
-                    className="w-full sm:w-1/2 flex justify-center items-center mt-20 sm:mt-0"
-                    style={{
-                        display: 'flex',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                    }}
-                >
-                    {/* 3D Model */}
-                    <FullSizeModel
-                        src="/models/Untitled.glb"
-                        width={screenSize.width < 768 ? '200px' : '600px'} // Adjusted for smaller devices
-                        height={screenSize.width < 768 ? '200px' : '400px'}
-                    />
-                </div>
-
-                {/* Materials Section */}
-                <div className="absolute right-2 lg:right-6 md:right-4 bottom-0.5 sm:bottom-auto sm:top-1/4 flex flex-col items-center bg-gray-200 rounded-full p-3 sm:p-4 shadow-lg">
-                    {/* Vertical Text */}
+    className=" h-auto  md:h-full lg:h-full w-full cursor-grab bg-cover bg-center bg-no-repeat"
+    style={{
+        backgroundImage: "url('/d3.png')",
+    }}
+>
+    <div className="flex flex-col sm:flex-row sm:flex-wrap justify-between items-center px-4 pt-20 sm:px-6 py-10 sm:py-20">
+        {/* Left Section */}
+        <div className="w-full sm:flex-1 max-w-lg mx-auto px-4 sm:px-5 text-center sm:text-left">
+            <h1 className="text-white text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight sm:leading-none mt-5">
+                VIRTUAL <br />
+                TRY-ON
+            </h1>
+            <p className="text-white text-base sm:text-lg font-semibold leading-snug mt-4 sm:mt-2 mb-6 sm:mb-8">
+                Powerful tools for creating and distributing lifelike 3D content and AR experiences. Elevate e-commerce, digital marketing, and more to boost engagement and drive sales.
+            </p>
+            <div className="flex justify-center w-full px-4">
+                <div className="flex items-center bg-[#384241] rounded-full shadow-lg w-fit max-w-sm sm:max-w-lg p-2">
                     <div
-                        className="text-gray-800 font-bold text-xs sm:text-sm mb-2"
-                        style={{
-                            writingMode: 'vertical-rl',
-                            transform: 'rotate(0deg)', // Text starts from the top flowing downward
-                            letterSpacing: '1px',
-                        }}
+                        onClick={handleDemoClick}
+                        className="bg-white text-gray-700 rounded-full px-10 py-4 sm:px-20 sm:py-2 outline-none focus:ring-2 focus:ring-blue-300 text-sm sm:text-lg text-center font-bold"
                     >
-                        MATERIALS
-                    </div>
-
-                    {/* Circles */}
-                    <div className="flex flex-col items-center space-y-1 sm:space-y-1">
-                        <div className="w-4 h-4 sm:w-5 sm:h-5 rounded-full bg-gray-400"></div>
-                        <div className="w-4 h-4 sm:w-5 sm:h-5 rounded-full bg-orange-300"></div>
-                        <div className="w-4 h-4 sm:w-5 sm:h-5 rounded-full bg-[#A07850]"></div>
+                        BOOK A DEMO
                     </div>
                 </div>
             </div>
         </div>
+
+        {/* Right Section */}
+        <div
+            className="w-full sm:w-1/2 flex flex-col  justify-center items-center mt-20 sm:mt-0"
+            style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+            }}
+        >
+            {/* 3D Model */}
+            <div className='mt-10'> 
+
+            <FullSizeModel
+                src="/models/Untitled.glb"
+                width={screenSize.width < 768 ? "200px" : "600px"} // Adjusted for smaller devices
+                height={screenSize.width < 768 ? "200px" : "400px"}
+                ringColor={ring}
+            />
+            </div>
+
+            {/* Colors and Materials Below the Model */}
+            <div className="flex flex-col items-center mt-1">
+                <div className="flex space-x-4 mt-2">
+                    <div
+                        className="w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-gray-300 cursor-pointer"
+                        onClick={() => setRing(0xC0C0C0)}
+                    ></div>
+                    <div
+                        className="w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-yellow-500 cursor-pointer"
+                        onClick={() => setRing(0xFFD700)}
+                    ></div>
+                    <div
+                        className="w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-[#A07850] cursor-pointer"
+                        onClick={() => setRing(0xA07850)}
+                    ></div>
+                </div>
+                {/* Material Names */}
+                <div className="bg-slate-100 w-auto h-6 flex justify-between items-center p-5 mt-5 rounded-[80px]">
+                    <div className="text-black font-medium text-sm m-2 hover:bg-slate-300 pl-2 pr-2 pt-1 pb-1 rounded-[60px]">Gold</div>
+                    <div className="text-black font-medium text-sm m-2 hover:bg-slate-300 pl-2 pr-2 pt-1 pb-1 rounded-[60px] ">Diamond</div>
+                    <div className="text-black font-medium text-sm m-2 hover:bg-slate-300 pl-2 pr-2 pt-1 pb-1 rounded-[60px]">Basket</div>
+                    <div className="text-black font-medium text-sm m-2 hover:bg-slate-300 pl-2 pr-2 pt-1 pb-1 rounded-[60px]">Ring</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 
 
