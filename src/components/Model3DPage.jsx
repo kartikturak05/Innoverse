@@ -47,7 +47,8 @@ const Model3DPage = () => {
             {/* Video 1 */}
             <div className="text-center flex-wrap ">
               <img
-               src={`/3DModeling/1/${images[currentIndex]}.jpeg`}
+              //  src={`/3DModeling/1/${images[currentIndex]}.jpeg`}
+               src={`/car.jpg`}
                 alt="Video 1"
                 className="mx-auto w-auto h-[350px] rounded-[40px]"
               />
@@ -70,7 +71,8 @@ const Model3DPage = () => {
                 style={{ pointerEvents: 'auto' }}
                 onContextMenu={(e) => e.preventDefault()}
               >
-                <source src="/3DModeling/jewellery-finalrender.mp4" type="video/mp4" />
+                {/* <source src="/3DModeling/jewellery-finalrender.mp4" type="video/mp4" /> */}
+                <source src="/mobile2.mp4" type="video/mp4" />
                 Your browser does not support the video tag.
               </video>
               <h2 className="text-xl font-bold mt-4">VIDEO : 2</h2>
@@ -92,7 +94,8 @@ const Model3DPage = () => {
                 style={{ pointerEvents: 'auto' }}
                 onContextMenu={(e) => e.preventDefault()}
               >
-                <source src="/3DModeling/M2M_videofinal.mp4" type="video/mp4" />
+                {/* <source src="/3DModeling/M2M_videofinal.mp4" type="video/mp4" /> */}
+                <source src="/mobile2.mp4" type="video/mp4" />
                 Your browser does not support the video tag.
               </video>
 
@@ -115,7 +118,8 @@ const Model3DPage = () => {
                 style={{ pointerEvents: 'auto' }}
                 onContextMenu={(e) => e.preventDefault()}
               >
-                <source src="/3DModeling/mobile_cc.mp4" type="video/mp4" />
+                {/* <source src="/3DModeling/mobile_cc.mp4" type="video/mp4" /> */}
+                <source src="/mobile2.mp4" type="video/mp4" />
                 Your browser does not support the video tag.
               </video>
               <h2 className="text-xl font-bold mt-4">VIDEO : 4</h2>
@@ -138,7 +142,8 @@ const Model3DPage = () => {
                 style={{ pointerEvents: 'auto' }}
                 onContextMenu={(e) => e.preventDefault()}
               >
-                <source src="/3DModeling/mobile2.mp4" type="video/mp4" />
+                {/* <source src="/3DModeling/mobile2.mp4" type="video/mp4" /> */}
+                <source src="/mobile2.mp4" type="video/mp4" />
                 Your browser does not support the video tag.
               </video>
               <h2 className="text-xl font-bold mt-4">VIDEO : 5</h2>
@@ -160,7 +165,8 @@ const Model3DPage = () => {
                 style={{ pointerEvents: 'auto' }}
                 onContextMenu={(e) => e.preventDefault()}
               >
-                <source src="/3DModeling/green_jewellery.mp4" type="video/mp4" />
+                {/* <source src="/3DModeling/green_jewellery.mp4" type="video/mp4" /> */}
+                <source src="/mobile2.mp4" type="video/mp4" />
                 Your browser does not support the video tag.
               </video>
               <h2 className="text-xl font-bold mt-4">VIDEO : 6</h2>
