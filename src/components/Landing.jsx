@@ -286,7 +286,7 @@ const DiamondComponent = ({ setDiamondText, setDiamondColor }) => {
                     <div
                         className="w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-gray-300 cursor-pointer"
                         onClick={() => {
-                            setDiamondText('/texture/silver.png')
+                            setDiamondText('');
                             setDiamondColor(0xD3D3D3)
                         }}
                     ></div>
@@ -294,13 +294,15 @@ const DiamondComponent = ({ setDiamondText, setDiamondColor }) => {
                         className="w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-green-600 cursor-pointer"
                         onClick={() => {
                             setDiamondText('/texture/green.jpg')
+
                             setDiamondColor(0x00FF00)
                         }}
                     ></div>
                     <div
                         className="w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-red-600 cursor-pointer"
                         onClick={() => {
-                            setDiamondText('/texture/red.png')
+                            setDiamondText('/texture/redDiamond.png')
+
                             setDiamondColor(0xFF0000)
                         }
                         }
