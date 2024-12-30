@@ -312,23 +312,23 @@ const DiamondComponent = ({ setDiamondText, setDiamondColor }) => {
         </>
     )
 }
-const BasketComponent = () => {
+const BasketComponent = ({setBasket}) => {
     return (
         <>
             <div className="flex flex-col items-center mt-1">
                 <div className="flex space-x-4 mt-2">
                     <div
-                        className="w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-gray-300 cursor-pointer"
+                        className="w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-gray-300 cursor-pointer text-center"
                         onClick={() => setRing(0xC0C0C0)}
-                    ></div>
+                    >B1</div>
                     <div
-                        className="w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-yellow-500 cursor-pointer"
+                        className="w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-yellow-500 cursor-pointer text-center"
                         onClick={() => setRing(0xFFD700)}
-                    ></div>
+                    >B2</div>
                     <div
-                        className="w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-[#A07850] cursor-pointer"
+                        className="w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-[#A07850] cursor-pointer text-center"
                         onClick={() => setRing(0xA07850)}
-                    ></div>
+                    >B3</div>
                 </div>
             </div>
 
