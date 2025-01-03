@@ -335,23 +335,27 @@ const BasketComponent = ({setBasket}) => {
         </>
     )
 }
-const RingComponent = () => {
+const RingComponent = ({setModel}) => {
     return (
         <>
             <div className="flex flex-col items-center mt-1">
                 <div className="flex space-x-4 mt-2">
                     <div
-                        className="w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-gray-300 cursor-pointer"
-                        onClick={() => setRing(0xC0C0C0)}
-                    ></div>
+                        className="w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-gray-300 cursor-pointer text-center"
+                        onClick={() => setModel('/models/final.glb')}
+                    >R1</div>
                     <div
-                        className="w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-yellow-500 cursor-pointer"
-                        onClick={() => setRing(0xFFD700)}
-                    ></div>
+                        className="w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-yellow-500 cursor-pointer text-center"
+                        onClick={() => setModel('/models/ring_2.glb')}
+                    >R2</div>
                     <div
-                        className="w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-[#A07850] cursor-pointer"
-                        onClick={() => setRing(0xA07850)}
-                    ></div>
+                        className="w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-[#A07850] cursor-pointer text-center"
+                        onClick={() => setModel('/models/ring_3.glb')}
+                    >R3</div>
+                    <div
+                        className="w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-[#3f6484] cursor-pointer text-center"
+                        onClick={() => setModel('/models/ring_4.glb')}
+                    >R4</div>
                 </div>
             </div>
 
@@ -371,6 +375,8 @@ function Landing() {
     const [ring, setRing] = useState(0xC0C0C0);
     const [DiamondText, setDiamondText] = useState('/texture/silver.png');
     const [DiamondColor, setDiamondColor] = useState(0xD3D3D3);
+
+    const [model,setModel] = useState('/models/final.glb');
 
 
     useEffect(() => {
@@ -464,7 +470,7 @@ function Landing() {
                     <div className='mt-10'>
 
                         <FullSizeModel
-                            src="/models/Untitled.glb"
+                            src={model}
                             width={screenSize.width < 768 ? "200px" : "600px"} // Adjusted for smaller devices
                             height={screenSize.width < 768 ? "200px" : "400px"}
                             ringColor={ring}
@@ -485,7 +491,7 @@ function Landing() {
                             />
                         )}
                         {click === 'basket' && <BasketComponent />}
-                        {click === 'ring' && <RingComponent />}
+                        {click === 'ring' && <RingComponent setModel={setModel} />}
                     </div>
 
                     {/* Material Names */}

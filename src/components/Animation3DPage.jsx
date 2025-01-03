@@ -64,13 +64,6 @@ const Animation3DPage = () => {
           </div>
         </div>
 
-        {/* Bottom Section */}
-        <div className="text-center mt-12 flex content-center items-center flex-col ">
-          <h1 className="lg:text-5xl text-3xl  font-extrabold text-white">
-            Precise and detailed visualisation  <br />with Augumented reality
-          </h1>
-          <div className='bg-slate-200 rounded-[40px] p-3 w-36 text-center justify-center mt-10 ' >Learn More</div>
-        </div>
       </div>
     </div>
   )
