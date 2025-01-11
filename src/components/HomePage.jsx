@@ -3,6 +3,7 @@ import Landing from './Landing';
 import CompanyOverview from './CompanyOverview';
 import Services from './Services';
 import ContactUs from './ContactUs';
+import OurClients from './OurClients';
 
 const HomePage = () => {
   return (
@@ -23,6 +24,12 @@ const HomePage = () => {
         {/* <h1>Our Services</h1> */}
         {/* Services content */}
         <Services/>
+      </section>
+
+      <section id="clients">
+        {/* <h1>Our Services</h1> */}
+        {/* Services content */}
+        <OurClients/>
       </section>
 
       <section id="contact-us">

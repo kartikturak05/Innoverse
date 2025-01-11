@@ -1,6 +1,18 @@
-import React from 'react'
+import {React,useState,useEffect} from 'react'
 
 const Animation3DPage = () => {
+
+
+  const images = ['image1.jpg','image2.jpg','image3.jpg','image4.jpg','image5.webp','image5.webp','image6.jpg','image7.jpg','image8.jpg','image9.jpg','image10.jpg','image11.jpg']
+
+  const [currentIndex, setCurrentIndex] = useState(0);
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
+    }, 3000); // Change image every 3 seconds
+    return () => clearInterval(interval); // Cleanup interval on component unmount
+  }, [images.length]);
+
   return (
     <div >
       <div className=" min-h-screen p-4 md:p-12" style={{
@@ -51,17 +63,13 @@ const Animation3DPage = () => {
         </div>
 
         {/* Inner continer */}
-        <div className="bg-white rounded-[40px] shadow-lg p-10 ">
-          <div className="">
+        <div className="bg-transparent rounded-[40px] w-4/3 h-[600px] shadow-lg p-4 ">
             {/* Video 1 */}
-            <div className="text-center flex-wrap ">
               <img
-                src="/car.jpg"
-                alt="Video 1"
-                className="mx-auto w-auto rounded-[40px]"
+                src={`/3dServices/${images[currentIndex]}`}
+                alt="Image 1"
+                className="mx-auto w-full h-full object-cover   rounded-[40px] "
               />
-            </div>
-          </div>
         </div>
 
       </div>

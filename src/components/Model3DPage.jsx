@@ -18,12 +18,21 @@ const Model3DPage = () => {
 
   // Video Data Array
   const videos = [
+    // { title: "Mobile Video", src: "/mobile2.mp4" },
+    // { title: "Mobile Video ", src: "/3DModeling/green_jewellery.mp4" },
+    // { title: "Mobile Video ", src: "/3DModeling/jewellery-finalrender.mp4" },
+    // { title: "Mobile Video ", src: "/3DModeling/M2M_videofinal.mp4" },
+    // { title: "Mobile Video ", src: "/3DModeling/mobile_cc.mp4" },
+    // { title: "Mobile Video ", src: "/3DModeling/mobile_cc.mp4" },
+
     { title: "Mobile Video", src: "/mobile2.mp4" },
     { title: "Mobile Video ", src: "/mobile2.mp4" },
     { title: "Mobile Video ", src: "/mobile2.mp4" },
     { title: "Mobile Video ", src: "/mobile2.mp4" },
     { title: "Mobile Video ", src: "/mobile2.mp4" },
     { title: "Mobile Video ", src: "/mobile2.mp4" },
+
+
   ];
 
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -125,7 +134,7 @@ const Model3DPage = () => {
                 src={modalVideo.src}
                 className="w-full h-full object-cover "
                 controls
-                autoplay="true"
+                autoPlay="true"
               ></video>
             </div>
           </div>

@@ -312,29 +312,7 @@ const DiamondComponent = ({ setDiamondText, setDiamondColor }) => {
         </>
     )
 }
-const BasketComponent = ({setBasket}) => {
-    return (
-        <>
-            <div className="flex flex-col items-center mt-1">
-                <div className="flex space-x-4 mt-2">
-                    <div
-                        className="w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-gray-300 cursor-pointer text-center"
-                        onClick={() => setRing(0xC0C0C0)}
-                    >B1</div>
-                    <div
-                        className="w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-yellow-500 cursor-pointer text-center"
-                        onClick={() => setRing(0xFFD700)}
-                    >B2</div>
-                    <div
-                        className="w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-[#A07850] cursor-pointer text-center"
-                        onClick={() => setRing(0xA07850)}
-                    >B3</div>
-                </div>
-            </div>
 
-        </>
-    )
-}
 const RingComponent = ({setModel}) => {
     return (
         <>
@@ -342,20 +320,31 @@ const RingComponent = ({setModel}) => {
                 <div className="flex space-x-4 mt-2">
                     <div
                         className="w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-gray-300 cursor-pointer text-center"
-                        onClick={() => setModel('/models/final.glb')}
+                        onClick={() => {
+                            setModel('/models/final.glb')
+                            setDiamondColor()
+                            setDiamondText('');
+                        }
+                    }
                     >R1</div>
                     <div
                         className="w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-yellow-500 cursor-pointer text-center"
-                        onClick={() => setModel('/models/ring_2.glb')}
+                        onClick={() => {
+                            setModel('/models/ring_2.glb')
+                            setDiamondColor()
+                            setDiamondText('');
+                        }
+                        }
                     >R2</div>
                     <div
                         className="w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-[#A07850] cursor-pointer text-center"
-                        onClick={() => setModel('/models/ring_3.glb')}
+                        onClick={() => {
+                            setModel('/models/ring_3.glb')
+                            setDiamondColor()
+                            setDiamondText('');
+                        }
+                    }
                     >R3</div>
-                    <div
-                        className="w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-[#3f6484] cursor-pointer text-center"
-                        onClick={() => setModel('/models/ring_4.glb')}
-                    >R4</div>
                 </div>
             </div>
 
@@ -415,9 +404,6 @@ function Landing() {
                 break;
             case 'Diamond':
                 setClick('diamond');
-                break;
-            case 'Basket':
-                setClick('basket');
                 break;
             case 'Ring':
                 setClick('ring');
@@ -490,7 +476,6 @@ function Landing() {
                                 setDiamondColor={setDiamondColor}
                             />
                         )}
-                        {click === 'basket' && <BasketComponent />}
                         {click === 'ring' && <RingComponent setModel={setModel} />}
                     </div>
 
@@ -498,8 +483,7 @@ function Landing() {
                     <div className="bg-slate-100 w-auto h-6 flex justify-between items-center p-5 mt-5 rounded-[80px]">
                         <div className="text-black font-medium text-sm m-2 hover:bg-slate-300 pl-2 pr-2 pt-1 pb-1 rounded-[60px]" onClick={() => handleClick('Gold')}>Gold</div>
                         <div className="text-black font-medium text-sm m-2 hover:bg-slate-300 pl-2 pr-2 pt-1 pb-1 rounded-[60px] " onClick={() => handleClick('Diamond')}>Diamond</div>
-                        <div className="text-black font-medium text-sm m-2 hover:bg-slate-300 pl-2 pr-2 pt-1 pb-1 rounded-[60px]" onClick={() => handleClick('Basket')}>Basket</div>
-                        <div className="text-black font-medium text-sm m-2 hover:bg-slate-300 pl-2 pr-2 pt-1 pb-1 rounded-[60px]" onClick={() => handleClick('Ring')}>Ring</div>
+                        <div className="text-black font-medium text-sm m-2 hover:bg-slate-300 pl-2 pr-2 pt-1 pb-1 rounded-[60px]" onClick={() => handleClick('Ring')}>Basket</div>
                     </div>
 
                 </div>
