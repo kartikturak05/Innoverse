@@ -12,41 +12,40 @@ const OurClients = () => {
         cursor: 'grab',
       }}
     >
-      <div className='flex flex-col items-center justify-center'>
-      <h1 className="text-8xl text-gray-400 font-bold text-left mb-10 ">
-        OUR CLIENTS
-      </h1>
-      <div className="grid grid-cols-8 gap-x-16 gap-y-7 ml-48 mr-48"> {/* Adjusted grid spacing */}
-        <img src="/clients/client1.jpg" className="w-auto h-20 object-contain" />
-        <img src="/clients/client2.jpg" className="w-auto h-20 object-contain" />
-        <img src="/clients/client3.jpg" className="w-auto h-20 object-contain" />
-        <img src="/clients/client4.jpg" className="w-auto h-20 object-contain" />
-        <img src="/clients/client5.jpg" className="w-auto h-20 object-contain" />
-        <img src="/clients/client6.png" className="w-auto h-20 object-contain" />
-
-
-        <img src="/clients/client1.jpg" className="w-auto h-20 object-contain" />
-        <img src="/clients/client2.jpg" className="w-auto h-20 object-contain" />
-        <img src="/clients/client3.jpg" className="w-auto h-20 object-contain" />
-        <img src="/clients/client4.jpg" className="w-auto h-20 object-contain" />
-        <img src="/clients/client5.jpg" className="w-auto h-20 object-contain" />
-        <img src="/clients/client6.png" className="w-auto h-20 object-contain" />
-        <img src="/clients/client1.jpg" className="w-auto h-20 object-contain" />
-        <img src="/clients/client2.jpg" className="w-auto h-20 object-contain" />
-        <img src="/clients/client3.jpg" className="w-auto h-20 object-contain" />
-        <img src="/clients/client4.jpg" className="w-auto h-20 object-contain" />
-        <img src="/clients/client5.jpg" className="w-auto h-20 object-contain" />
-        <img src="/clients/client6.png" className="w-auto h-20 object-contain" />
-        <img src="/clients/client1.jpg" className="w-auto h-20 object-contain" />
-        <img src="/clients/client2.jpg" className="w-auto h-20 object-contain" />
-        <img src="/clients/client3.jpg" className="w-auto h-20 object-contain" />
-        <img src="/clients/client4.jpg" className="w-auto h-20 object-contain" />
-        <img src="/clients/client5.jpg" className="w-auto h-20 object-contain" />
-        <img src="/clients/client6.png" className="w-auto h-20 object-contain" />
-        
+      <div className="flex flex-col items-center justify-center">
+        <h1 className="text-4xl md:text-6xl lg:text-8xl text-gray-400 font-bold text-center mb-10">
+          OUR CLIENTS
+        </h1>
+        <div className="grid gap-4 grid-cols-2 md:grid-cols-4 lg:grid-cols-5  px-5 md:px-10 lg:gap-x-16 lg:gap-y-7 lg:ml-48 lg:mr-48">
+          {/* Adjusted grid spacing */}
+          {[
+            'client1.jpg',
+            'client2.jpg',
+            'client3.jpg',
+            'client4.jpg',
+            'client5.jpg',
+            'client6.png',
+            'client1.jpg',
+            'client2.jpg',
+            'client3.jpg',
+            'client4.jpg',
+            'client5.jpg',
+            'client6.png',
+            'client1.jpg',
+            'client2.jpg',
+            'client3.jpg',
+            'client4.jpg',
+            'client5.jpg',
+            'client6.png',
+          ].map((client, index) => (
+            <img
+              key={index}
+              src={`/clients/${client}`}
+              className="w-auto h-16 sm:h-20 md:h-24 lg:h-20 object-contain"
+            />
+          ))}
+        </div>
       </div>
-      </div>
-      
     </div>
   );
 };

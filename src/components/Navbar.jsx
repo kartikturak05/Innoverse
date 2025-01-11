@@ -68,6 +68,12 @@ const Navbar = () => {
             </a>
             <a
               className="hover:text-gray-400 cursor-pointer"
+              onClick={() => handleNavigation('#OurClients')}
+            >
+              Clientele
+            </a>
+            <a
+              className="hover:text-gray-400 cursor-pointer"
               onClick={() => handleNavigation('#contact-us')}
             >
               Contact Us

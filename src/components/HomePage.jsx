@@ -26,7 +26,7 @@ const HomePage = () => {
         <Services/>
       </section>
 
-      <section id="clients">
+      <section id="OurClients">
         {/* <h1>Our Services</h1> */}
         {/* Services content */}
         <OurClients/>
