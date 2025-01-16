@@ -15,6 +15,7 @@ import HomePage from './components/HomePage';
 import Mob from './components/Mob';
 import AboutUs from './components/AboutUs';
 import AugumentedReality from './components/AugumentedReality';
+import FAQ from './components/FAQ';
 
 
 const App = () => {
@@ -53,6 +54,7 @@ const App = () => {
         <Route path="/3DModel" element={<Model3DPage />} />
         <Route path="/3DAnimation" element={<Animation3DPage />} />
         <Route path="/AugumentedReality" element={<AugumentedReality />} />
+        <Route path="/FAQ" element={<FAQ />} />
   
 
       </Routes>

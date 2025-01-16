@@ -74,6 +74,12 @@ const Navbar = () => {
             </a>
             <a
               className="hover:text-gray-400 cursor-pointer"
+              onClick={() => navigate('/FAQ')}
+            >
+              FAQs
+            </a>
+            <a
+              className="hover:text-gray-400 cursor-pointer"
               onClick={() => handleNavigation('#contact-us')}
             >
               Contact Us

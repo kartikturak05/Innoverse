@@ -69,6 +69,9 @@ const Mob = () => {
                             <li className='p-4 hover:bg-white/5 rounded-md cursor-pointer font-bold' onClick={() => handleNavigation('#home')} ><a href="#home">Home</a></li>
                             <li className='p-4 hover:bg-white/5 rounded-md cursor-pointer font-bold' onClick={() => handleNavigation('#company-overview')} > <a href="#company-overview" >Products</a> </li>
                             <li className='p-4 hover:bg-white/5 rounded-md cursor-pointer font-bold' onClick={() => handleNavigation('#services')} >  <a href="#services" >Services</a> </li>
+
+                            <li className='p-4 hover:bg-white/5 rounded-md cursor-pointer font-bold' onClick={() => navigate('/FAQ')} >  <a href="/FAQ" >FAQs</a> </li>
+
                             <li className='p-4 hover:bg-white/5 rounded-md cursor-pointer font-bold' onClick={() => handleNavigation('#OurClients')} >  <a href="#OurClients" >Clientele</a> </li>
                             <li className='p-4 hover:bg-white/5 rounded-md cursor-pointer font-bold'  onClick={() => handleNavigation('#contact-us')} > <a href="#contact-us" >Contact Us</a>  </li>
 
