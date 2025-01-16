@@ -16,6 +16,7 @@ import Mob from './components/Mob';
 import AboutUs from './components/AboutUs';
 import AugumentedReality from './components/AugumentedReality';
 import FAQ from './components/FAQ';
+import Careers from './components/Careers';
 
 
 const App = () => {
@@ -55,6 +56,7 @@ const App = () => {
         <Route path="/3DAnimation" element={<Animation3DPage />} />
         <Route path="/AugumentedReality" element={<AugumentedReality />} />
         <Route path="/FAQ" element={<FAQ />} />
+        <Route path="/Careers" element={<Careers />} />
   
 
       </Routes>

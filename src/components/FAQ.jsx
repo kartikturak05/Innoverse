@@ -93,7 +93,7 @@ const FAQ = () => {
   };
 
   return (
-    <div className="flex items-center justify-center h-screen bg-gray-100">
+    <div className="flex items-center justify-center h-screen bg-gray-100 pt-96 md:pt-20 ">
       <div className="p-4 rounded-lg bg-gray-100 flex items-center justify-center max-w-3xl">
         {!faqs ? (
           <div className="flex flex-col items-center justify-center p-10">
@@ -107,7 +107,7 @@ const FAQ = () => {
               <img
                 src="/virtualTryOn.jpg" // Replace with your image path
                 alt="Try-On Icon"
-                className="w-12 h-12 mx-auto mb-4"
+                className="w-24 h-18 mx-auto mb-4"
               />
               <h1 className="text-xl font-semibold">Try-On Technology</h1>
               <p>
@@ -122,7 +122,7 @@ const FAQ = () => {
               <img
                 src="/3dmodelingicon.webp" // Replace with your image path
                 alt="3D Modelling Icon"
-                className="w-12 h-12 mx-auto mb-4"
+                className="w-24 h-18 mx-auto mb-4"
               />
               <h1 className="text-xl font-semibold">
                 3D Modelling & Animation
@@ -139,7 +139,7 @@ const FAQ = () => {
               <img
                 src="/augumentedRealityicon.jpg" // Replace with your image path
                 alt="AR Icon"
-                className="w-12 h-12 mx-auto mb-4"
+                className="w-24 h-18 mx-auto mb-4"
               />
               <h1 className="text-xl font-semibold">Augmented Reality</h1>
               <p>

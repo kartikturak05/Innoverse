@@ -193,6 +193,10 @@ const ContactUs = () => {
     const handleDisclaimerClick = () => {
       navigate('/Disclaimer');  // Navigate to the 3D Model page
     };
+
+    const handleCareersClick = () => {
+      navigate('/Careers');  // Navigate to the 3D Model page
+    };
   
   return (
     <div
@@ -231,6 +235,7 @@ const ContactUs = () => {
           <li onClick={handlePrivacyClick} className="m-1">Privacy Policy</li>
           <li onClick={handleTermsClick} className="m-1">Terms & Conditions</li>
           <li onClick={handleDisclaimerClick} className="m-1">Disclaimer</li>
+          <li onClick={handleCareersClick} className="m-1">We're Hiring</li>
         </ul>
       </div>
 
