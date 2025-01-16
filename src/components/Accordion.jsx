@@ -5,7 +5,9 @@ const Accordion = ({ title, answer }) => {
   return (
     <>
       {/* {faqs.map((question,answer,index) => ( */}
-      <div className="py-2 border-b-stone-500 border-y-2">
+      <div className="md:ml-16 md:mr-16">
+
+      <div className="py-2 border-b-stone-500  mb-2 border-b-2 ">
         <button
           className="flex justify-between w-full pb-2"
           onClick={() => setAccordionOpen(!accordionOpen)}
@@ -47,6 +49,9 @@ const Accordion = ({ title, answer }) => {
             </div>
         </div>
       </div>
+
+      </div>
+      
     </>
   );
 };
