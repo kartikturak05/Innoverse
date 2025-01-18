@@ -235,7 +235,7 @@ const ContactUs = () => {
           <li onClick={handlePrivacyClick} className="m-1">Privacy Policy</li>
           <li onClick={handleTermsClick} className="m-1">Terms & Conditions</li>
           <li onClick={handleDisclaimerClick} className="m-1">Disclaimer</li>
-          <li onClick={handleCareersClick} className="m-1">We're Hiring</li>
+          {/* <li onClick={handleCareersClick} className="m-1">We're Hiring</li> */}
         </ul>
       </div>
 

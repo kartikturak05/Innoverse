@@ -17,6 +17,7 @@ import AboutUs from './components/AboutUs';
 import AugumentedReality from './components/AugumentedReality';
 import FAQ from './components/FAQ';
 import Careers from './components/Careers';
+import ChatBot from './components/ChatBot';
 
 
 const App = () => {
@@ -44,6 +45,7 @@ const App = () => {
     <>
       <CustomCursor />
       {isMobile ? <Mob /> : <Navbar />}
+      <ChatBot/>
       <Routes>
         <Route path="/" element={<HomePage />} />
 
