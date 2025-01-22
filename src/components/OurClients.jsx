@@ -25,18 +25,14 @@ const OurClients = () => {
             'client4.jpg',
             'client5.jpg',
             'client6.png',
+            'client7.jpg',
             'client1.jpg',
             'client2.jpg',
             'client3.jpg',
             'client4.jpg',
             'client5.jpg',
             'client6.png',
-            'client1.jpg',
-            'client2.jpg',
-            'client3.jpg',
-            'client4.jpg',
-            'client5.jpg',
-            'client6.png',
+            'client7.jpg',
           ].map((client, index) => (
             <img
               key={index}

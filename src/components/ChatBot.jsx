@@ -47,14 +47,20 @@ const ThankYouMessage = ({ onClose }) => {
 
 const CallbackRequest = ({ onSubmit,onClose}) => {
   const [mobileNo,setMobileNo] = useState('');
+  const [name,setName] = useState('');
+  const [preferredTime,setPreferredTime] = useState('');
 
   const templateParams = {
-    message: mobileNo,  // Use 'message' as the key for the mobile number
+    mobileNo: mobileNo,  // Use 'message' as the key for the mobile number
+    name: name,
+    time: preferredTime
   };
 
+
   const sendData = () => {
-    console.log('Mobile No:', mobileNo);
-    console.log(import.meta.env.VITE_SERVICEID, import.meta.env.VITE_TEMPLATEIDCALL, import.meta.env.VITE_PUBLICKEY);
+    // console.log('Mobile No:', mobileNo);
+    console.log(templateParams)
+    // console.log(import.meta.env.VITE_SERVICEID, import.meta.env.VITE_TEMPLATEIDCALL, import.meta.env.VITE_PUBLICKEY);
 
 
     emailjs.send(import.meta.env.VITE_SERVICEID,import.meta.env.VITE_TEMPLATEIDCALL , templateParams, import.meta.env.VITE_PUBLICKEY)
@@ -108,7 +114,7 @@ const CallbackRequest = ({ onSubmit,onClose}) => {
           <div className="mt-2  mb-3">
            
             <input
-              onChange={(e) => setMobileNo(e.target.value)}
+              onChange={(e) => setName(e.target.value)}
               type="text"
               id="name"
               placeholder="John Doe"
@@ -139,9 +145,10 @@ const CallbackRequest = ({ onSubmit,onClose}) => {
           <select
             id="timeRange"
             className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+            onChange={(e) => setPreferredTime(e.target.value)}
           >
             {/* Hardcoded time ranges */}
-            <option value="" disabled selected>
+            <option value="9:00-10:00 AM" disabled>
               Select a time range
             </option>
             <option value="9-10 AM">9:00–10:00 AM</option>
