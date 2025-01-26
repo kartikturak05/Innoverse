@@ -2,17 +2,26 @@ import React from "react";
 
 const AugmentedReality = () => {
   return (
-    <div className="bg-white shadow-lg rounded-lg p-8  max-w-5xl mx-auto ">
-      <h2 className="text-3xl lg:text-4xl font-extrabold text-center text-teal-600 mb-6 mt-20">
-        Augmented Reality
-      </h2>
-      <p className="text-gray-700 text-lg lg:text-xl mb-8 leading-relaxed">
-        Augmented Reality is reshaping how brands interact with their audiences, and we’re at the forefront of this revolution. Our AR solutions create immersive, interactive experiences that seamlessly merge the digital and physical worlds.
-      </p>
-      <p className="text-gray-700 text-lg lg:text-xl mb-8 leading-relaxed">
-        Imagine customers exploring your product in their own environment or experiencing a story like never before. With our AR expertise, we help you create memorable experiences that leave a lasting impression.
-      </p>
-      
+    <div className="flex flex-col items-center justify-center h-auto bg-gradient-to-b from-purple-300 to-indigo-300 pt-48 z-0">
+      <div className="bg-gray-800 shadow-xl rounded-3xl p-10 max-w-4xl mx-auto text-center mb-8">
+        <h2 className="text-4xl font-bold text-white mb-6">Augmented Reality</h2>
+
+        <p className="text-gray-300 text-lg leading-relaxed mb-4">
+          Elevate Your Brand with Stunning 3D Visuals & AR, Experience the Future with 3D & Augmented Reality.
+        </p>
+
+        <p className="text-gray-300 text-lg leading-relaxed">
+          Revolutionize your business with cutting-edge 3D Animation and Augmented Reality solutions. Captivate your audience with immersive, lifelike visuals that boost engagement, drive sales, and elevate your brand's digital presence.
+        </p>
+      </div>
+
+      <div className="rounded-3xl w-4/5 h-auto shadow-xl overflow-hidden flex justify-center items-center bg-gray-900">
+        <img
+          src={`/augumentedreality.jpg`}
+          alt="Augmented Reality"
+          className="w-full h-[80vh] object-fill"
+        />
+      </div>
     </div>
   );
 };
