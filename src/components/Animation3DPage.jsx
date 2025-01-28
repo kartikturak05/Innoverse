@@ -197,7 +197,7 @@ const Animation3DPage = () => {
                 </div>
               </div>
 
-              <div className="text-base text-white">
+              <div className="text-base text-white font-bold">
                 With Architectural 3D Services , stakeholders gain a clear ,
                 compelling vision of their projects , facilitating better
                 decision-making and impactful project presentations
@@ -319,13 +319,13 @@ const Animation3DPage = () => {
 
         {/* Inner continer */}
         {/* Video 1 */}
-        <div className="bg-transparent rounded-[40px] w-4/3 h-[600px] shadow-lg p-4 ">
+        {/* <div className="bg-transparent rounded-[40px] w-4/3 h-[600px] shadow-lg p-4 ">
           <img
             src={`/3dServices/${images[currentIndex]}`}
             alt="Image 1"
             className="mx-auto w-full h-full object-cover   rounded-[40px] "
           />
-        </div>
+        </div> */}
       </div>
     </div>
   );
