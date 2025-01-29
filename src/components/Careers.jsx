@@ -2,13 +2,11 @@ import React, { useState } from "react";
 
 const Careers = () => {
   const [formData, setFormData] = useState({
-    linkedinUrl: "",
     name: "",
     email: "",
     phoneNo: "",
-    location: "",
-    githubUrl: "",
-    portfolioUrl: "",
+    github_portfolioUrl: "",  
+    jobProfile: "",
     earliestStartDate: "",
     additionalInfo: "",
   });
@@ -21,49 +19,28 @@ const Careers = () => {
     });
   };
 
+  const handleClick = () => { 
+
+    if(formData.name === "" || formData.email === "" || formData.phoneNo === "" || formData.jobProfile === "" || formData.github_portfolioUrl === "" || formData.earliestStartDate === "" || formData.additionalInfo === "") {
+      alert("Please fill all the fields");
+      return;
+    }
+
+    console.log(formData);
+  }
+
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-100 pt-20">
       <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-2xl">
-        <h1 className="text-5xl font-bold text-center mb-4">Work with us</h1>
+        <h1 className="md:text-5xl text-4xl font-bold text-center mb-4">Work with us</h1>
         <p className="text-center mb-6 font-medium text-xl">
           Submit your applications to work with Innoverrese
         </p>
 
         <form>
           <div className="space-y-4">
-            <div>
-              <label
-                htmlFor="linkedinUrl"
-                className="block text-base font-medium text-gray-700"
-              >
-                LinkedIn URL
-              </label>
-              <input
-                type="url"
-                id="linkedinUrl"
-                name="linkedinUrl"
-                value={formData.linkedinUrl}
-                onChange={handleChange}
-                className="w-full p-2 border border-gray-300 rounded-md"
-                placeholder="https://linkedin.com/in/yourprofile"
-              />
-            </div>
 
-            <div>
-              <label
-                htmlFor="resume"
-                className="block text-base font-medium text-gray-700"
-              >
-                Resume/CV
-              </label>
-              <input
-                type="file"
-                id="resume"
-                name="resume"
-                // onChange={handleChange} // You can handle the file input if needed
-                className="w-full p-2 border border-gray-300 rounded-md"
-              />
-            </div>
+            
 
             <div>
               <label
@@ -119,57 +96,56 @@ const Careers = () => {
               />
             </div>
 
-            <div>
-              <label
-                htmlFor="location"
-                className="block text-lg font-medium text-gray-700"
-              >
-                Current Location
-              </label>
-              <input
-                type="text"
-                id="location"
-                name="location"
-                value={formData.location}
-                onChange={handleChange}
-                className="w-full p-2 border border-gray-300 rounded-md"
-                placeholder="Your Location"
-              />
-            </div>
 
             <div>
               <label
-                htmlFor="githubUrl"
+                htmlFor="jobProfile"
                 className="block text-lg font-medium text-gray-700"
               >
-                GitHub URL
+                Select Your Job Role
+              </label>
+
+              <select
+                id="jobProfile"
+                name="jobProfile"
+                value={formData.jobProfile}
+                onChange={handleChange}
+                className="w-full p-2 border border-gray-300 rounded-md"
+              >
+                <option value="Modelling and Texturingr"> Modelling and Texturing
+                </option>
+                <option value="3D Animator">3D Animator
+                </option>
+                <option value="Animation">Animation
+                </option>
+                <option value="Storyboard">Storyboard
+                </option>
+                <option value="Rigging">Rigging
+                </option>
+                <option value="Web Developer ">Web Developer 
+                </option>
+                <option value="App Develope">App Developer</option>
+                <option value="UI/UX Designer & Video Editor">UI/UX Designer & Video Editor</option>
+              </select>
+            </div>
+
+
+
+            <div>
+              <label
+                htmlFor="github_portfolioUrl"
+                className="block text-lg font-medium text-gray-700"
+              >
+                GitHub/Portfolio URL
               </label>
               <input
                 type="url"
-                id="githubUrl"
-                name="githubUrl"
-                value={formData.githubUrl}
+                id="github_portfolioUrl"
+                name="github_portfolioUrl"
+                value={formData.github_portfolioUrl}
                 onChange={handleChange}
                 className="w-full p-2 border border-gray-300 rounded-md"
                 placeholder="https://github.com/yourprofile"
-              />
-            </div>
-
-            <div>
-              <label
-                htmlFor="portfolioUrl"
-                className="block text-lg font-medium text-gray-700"
-              >
-                Portfolio URL
-              </label>
-              <input
-                type="url"
-                id="portfolioUrl"
-                name="portfolioUrl"
-                value={formData.portfolioUrl}
-                onChange={handleChange}
-                className="w-full p-2 border border-gray-300 rounded-md"
-                placeholder="https://yourportfolio.com"
               />
             </div>
 
@@ -207,10 +183,27 @@ const Careers = () => {
               />
             </div>
 
+            <div>
+              <label
+                htmlFor="resume"
+                className="block text-base font-medium text-gray-700"
+              >
+                Resume/CV
+              </label>
+              <input
+                type="file"
+                id="resume"
+                name="resume"
+                // onChange={handleChange} // You can handle the file input if needed
+                className="w-full p-2 border border-gray-300 rounded-md"
+              />
+            </div>
+
             <div className="text-center">
               <button
-                type="submit"
+                type="button"
                 className="px-6 py-2 bg-blue-500 text-white font-semibold rounded-md hover:bg-blue-600"
+                onClick={handleClick}
               >
                 Submit Application
               </button>

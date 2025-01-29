@@ -76,6 +76,10 @@ const Mob = () => {
                               }} >  <a onClick={()=> navigate('/FAQ')} >FAQs</a> </li> */}
 
                             <li className='p-4 hover:bg-white/5 rounded-md cursor-pointer font-bold' onClick={() => handleNavigation('#OurClients')} >  <a href="#OurClients" >Clientele</a> </li>
+                           <li className='p-4 hover:bg-white/5 rounded-md cursor-pointer font-bold' onClick={() =>{ 
+                              toggleDrawer();
+                              navigate('/Careers')
+                              }} >  <a onClick={()=> navigate('/Careers')} >Careers</a> </li>
                             <li className='p-4 hover:bg-white/5 rounded-md cursor-pointer font-bold'  onClick={() => handleNavigation('#contact-us')} > <a href="#contact-us" >Contact Us</a>  </li>
 
                         </ul>

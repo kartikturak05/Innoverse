@@ -54,7 +54,6 @@ const FormSection = ({setIsEmailSent}) => {
 
   // Handle reCAPTCHA success
   const handleCaptcha = (token) => {
-    console.log('reCAPTCHA Token:', token);
     setCaptchaToken(token);
     setVerified(true);
     validateForm(formData); // Revalidate form when captcha is verified
