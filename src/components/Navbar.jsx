@@ -41,7 +41,7 @@ const Navbar = () => {
           </div>
 
           {/* Navigation Links */}
-          <div className="flex space-x-4 sm:space-x-4 md:space-x-8 lg:space-x-12 text-sm sm:text-base md:text-lg lg:text-xl font-semibold">
+          <div className="flex space-x-4 sm:space-x-4 md:space-x-8 lg:space-x-12 text-sm sm:text-base md:text-lg text-lg font-semibold">
             <a
               className="hover:text-gray-400 cursor-pointer"
               onClick={() => handleNavigation('#home')}
