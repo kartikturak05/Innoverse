@@ -18,19 +18,19 @@ const Model3DPage = () => {
 
   // Video Data Array
   const videos = [
-    // { title: "Mobile Video", src: "/mobile2.mp4" },
-    // { title: "Mobile Video ", src: "/3DModeling/green_jewellery.mp4" },
-    // { title: "Mobile Video ", src: "/3DModeling/jewellery-finalrender.mp4" },
-    // { title: "Mobile Video ", src: "/3DModeling/M2M_videofinal.mp4" },
-    // { title: "Mobile Video ", src: "/3DModeling/Connex2.mp4" },
-    // { title: "Mobile Video ", src: "/3DModeling/aeroplane.mp4" }, 
-
     { title: "Mobile Video", src: "/mobile2.mp4" },
-    { title: "Mobile Video ", src: "/mobile2.mp4" },
-    { title: "Mobile Video ", src: "/mobile2.mp4" },
-    { title: "Mobile Video ", src: "/mobile2.mp4" },
-    { title: "Mobile Video ", src: "/mobile2.mp4" },
-    { title: "Mobile Video ", src: "/mobile2.mp4" },
+    { title: "Mobile Video ", src: "/3DModeling/green_jewellery.mp4" },
+    { title: "Mobile Video ", src: "/3DModeling/jewellery-finalrender.mp4" },
+    { title: "Mobile Video ", src: "/3DModeling/M2M_videofinal.mp4" },
+    { title: "Mobile Video ", src: "/3DModeling/Connex2.mp4" },
+    { title: "Mobile Video ", src: "/3DModeling/aeroplane.mp4" }, 
+
+    // { title: "Mobile Video", src: "/mobile2.mp4" },
+    // { title: "Mobile Video ", src: "/mobile2.mp4" },
+    // { title: "Mobile Video ", src: "/mobile2.mp4" },
+    // { title: "Mobile Video ", src: "/mobile2.mp4" },
+    // { title: "Mobile Video ", src: "/mobile2.mp4" },
+    // { title: "Mobile Video ", src: "/mobile2.mp4" },
 
 
   ];

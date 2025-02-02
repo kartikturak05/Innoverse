@@ -1,19 +1,19 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';  // You need to import useNavigate here
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { Sun, Moon } from 'lucide-react'; // Icons for dark mode toggle
 
 const Navbar = () => {
   const navigate = useNavigate();
+  const [darkMode, setDarkMode] = useState(false);
 
   const handleNavigation = (hash) => {
     if (window.location.pathname === '/') {
-      // Scroll to the section if already on the HomePage
       const section = document.querySelector(hash);
       if (section) {
         section.scrollIntoView({ behavior: 'smooth' });
       }
     } else {
-      // Go to the HomePage first, then scroll to the section
-      navigate('/');  // This takes you to the HomePage
+      navigate('/');
       setTimeout(() => {
         const section = document.querySelector(hash);
         if (section) {
@@ -23,75 +23,29 @@ const Navbar = () => {
     }
   };
 
-  const handleAboutUs = ()=>{
-    navigate("/AboutUs")
-  }
+  const handleAboutUs = () => {
+    navigate("/AboutUs");
+  };
 
   return (
-    <nav className="bg-[#384241] text-white cursor-grab fixed w-full z-10">
+    <nav className={`${darkMode ? 'bg-gray-900' : 'bg-[#384241]'} text-white cursor-grab fixed w-full z-10`}>
       <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 sm:h-20">
-          {/* Logo Section */}
           <div className="flex items-center">
-            <img
-              src="/logo.png"
-              alt="Connex Logo"
-              className="h-12 sm:h-16 md:h-20 lg:h-24 mr-2"
-            />
+            <img src="/logo.png" alt="Connex Logo" className="h-12 sm:h-16 md:h-20 lg:h-24 mr-2" />
           </div>
 
-          {/* Navigation Links */}
-          <div className="flex space-x-4 sm:space-x-4 md:space-x-8 lg:space-x-12 text-sm sm:text-base md:text-lg text-lg font-semibold">
-            <a
-              className="hover:text-gray-400 cursor-pointer"
-              onClick={() => handleNavigation('#home')}
-            >
-              Home
-            </a>
-            <a
-              className="hover:text-gray-400 cursor-pointer"
-              onClick={() => handleAboutUs('#home')}
-            >
-              About Us
-            </a>
-            <a
-              className="hover:text-gray-400 cursor-pointer"
-              onClick={() => handleNavigation('#company-overview')}
-            >
-              Products
-            </a>
-            <a
-              className="hover:text-gray-400 cursor-pointer"
-              onClick={() => handleNavigation('#services')}
-            >
-              Services
-            </a>
-            <a
-              className="hover:text-gray-400 cursor-pointer"
-              onClick={() => handleNavigation('#OurClients')}
-            >
-              Clientele
-            </a>
-            {/* <a
-              className="hover:text-gray-400 cursor-pointer"
-              onClick={() => navigate('/FAQ')}
-            >
-              FAQs
-            </a> */}
-
-            <a
-              className="hover:text-gray-400 cursor-pointer"
-              onClick={() => navigate('/Careers')}
-            >
-              Carriers
-            </a>
-
-            <a
-              className="hover:text-gray-400 cursor-pointer"
-              onClick={() => handleNavigation('#contact-us')}
-            >
-              Contact Us
-            </a>
+          <div className="flex space-x-4 sm:space-x-4 md:space-x-8 lg:space-x-12 text-sm sm:text-base md:text-lg font-semibold">
+            <a className="hover:text-gray-400 cursor-pointer" onClick={() => handleNavigation('#home')}>Home</a>
+            <a className="hover:text-gray-400 cursor-pointer" onClick={handleAboutUs}>About Us</a>
+            <a className="hover:text-gray-400 cursor-pointer" onClick={() => handleNavigation('#company-overview')}>Products</a>
+            <a className="hover:text-gray-400 cursor-pointer" onClick={() => handleNavigation('#services')}>Services</a>
+            <a className="hover:text-gray-400 cursor-pointer" onClick={() => handleNavigation('#OurClients')}>Clientele</a>
+            <a className="hover:text-gray-400 cursor-pointer" onClick={() => navigate('/Careers')}>Carriers</a>
+            <a className="hover:text-gray-400 cursor-pointer" onClick={() => handleNavigation('#contact-us')}>Contact Us</a>
+            <button onClick={() => setDarkMode(!darkMode)} className="ml-4 p-2 rounded-full bg-gray-700 hover:bg-gray-600">
+              {darkMode ? <Sun className="text-yellow-400" size={25} /> : <Moon className="text-white" size={25} />}
+            </button>
           </div>
         </div>
       </div>
