@@ -421,34 +421,37 @@ function Landing() {
         backgroundImage: "url('/d3.png')",
       }}
     >
-      <div className="flex flex-col sm:flex-row sm:flex-wrap justify-between items-center px-4 pt-20 sm:px-6 py-10 sm:py-20">
-        {/* Left Section */}
-        <div className="w-full sm:flex-1 max-w-2xl mx-auto px-4 sm:px-5 text-center sm:text-left">
-          <h1 className="text-white text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight sm:leading-none mt-7 sm:mt-7 text-center">
-            Bringing Your Vision to Life
-            <br />
-            <span className="text-lg sm:text-xl leading-tight block mt-1 sm:mt-2">
-              Stunning 3D Animation That Exceeds Expectations
-            </span>
-          </h1>
-          <p className="text-white text-sm sm:text-sm font-medium leading-relaxed mt-3 sm:mt-4 mb-5 sm:mb-6 text-center max-w-2xl mx-auto">
-            At <span className="text-blue-600">Innoverrese </span>, we craft breathtaking 3D animations that go beyond
-            expectations. From jaw-dropping product demos to heart-pounding
-            action sequences, we bring your vision to life with <span className="text-blue-600"> hyper-realistic
-            visuals </span>, unmatched creativity, and seamless collaboration.
-            <br />
-            Our passionate team of artists and tech wizards delivers  <span className="text-blue-600"> on time </span>,
-            every time, ensuring your project isn’t just done—it’s perfected.
-            <br />
-            Ready to create something <span className="text-blue-600"> extraordinary? </span> Let’s push boundaries and
-            exceed your wildest dreams.
-          </p>
-          <p className="text-blue-800 text-lg sm:text-lg font-semibold text-center mb-5">
-            🎥 Your Vision. Our Passion. Unforgettable Animation. 🎥
-          </p>
+      <div className="flex flex-col lg:flex-row items-center px-4 pt-20 sm:px-6 py-10 sm:py-20">
+        {/* Left Section (60% Width on Large Screens) */}
+        <div className="w-full lg:w-3/5  px-4 lg:px-5 text-center rounded-full ">
+          <div
+            className="pt-5 pb-5 pl-1 pr-1 rounded-xl w-full lg:w-full"
+            style={{
+              backgroundImage: "url('/d2.png')",
+            }}
+          >
+            <h1 className="text-black text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight sm:leading-none mt-7 sm:mt-7 text-center">
+              Bringing Your Vision to Life With
+            </h1>
 
-          <div className="flex justify-center w-full px-4">
-            <div className="flex items-center bg-[#384241] rounded-full shadow-lg w-fit max-w-sm sm:max-w-lg p-2">
+            <h1 className="text-black text-3xl sm:text-4xl lg:text-4xl font-semibold leading-tight sm:leading-none md:mt-3 sm:mt-7 mb-10">
+              Stunning 3D Animation That Exceeds Expectations
+            </h1>
+            <p className="text-black md:text-lg sm:text-sm font-normal leading-normal  mt-3 sm:mt-4 mb-5 sm:mb-6 w-full mx-auto">
+              At Innoverrese we craft breathtaking 3D animations that go beyond
+              expectations. From jaw-dropping product demos to heart-pounding
+              action sequences, we bring your vision to life with
+              hyper-realistic visuals, unmatched creativity, and seamless
+              collaboration. Our passionate team of artists and tech wizards
+              delivers on time, every time, ensuring your project isn’t just
+              done—it’s perfected. Ready to create something extraordinary?
+              Let’s push boundaries and exceed your wildest dreams.
+            </p>
+          </div>
+
+
+          <div className="flex justify-around w-full px-4 mt-2">
+            <div className="flex items-center bg-[#384241] rounded-full  w-fit max-w-sm sm:max-w-lg p-2 ">
               <div
                 onClick={handleDemoClick}
                 className="bg-white text-gray-700 rounded-full px-10 py-4 sm:px-20 sm:py-2 outline-none focus:ring-2 focus:ring-blue-300 text-sm sm:text-lg text-center font-bold"
@@ -456,23 +459,24 @@ function Landing() {
                 BOOK A DEMO
               </div>
             </div>
+            <p
+              className="text-lg sm:text-lg font-bold text-center pl-1 pr-1 pt-4 pb-4 rounded-full w-auto "
+              style={{
+                backgroundImage: "url('/d2.png')",
+              }}
+            >
+              🎥 Your Vision. Our Passion. Unforgettable Animation. 🎥
+            </p>
           </div>
         </div>
 
-        {/* Right Section */}
-        <div
-          className="w-full sm:w-1/2 flex flex-col  justify-center items-center mt-20 sm:mt-0"
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
+        {/* Right Section (40% Width on Large Screens) */}
+        <div className="w-full lg:w-2/5 flex flex-col justify-center items-center mt-20 lg:mt-0">
           {/* 3D Model */}
           <div className="mt-10">
             <FullSizeModel
               src={model}
-              width={screenSize.width < 768 ? "200px" : "600px"} // Adjusted for smaller devices
+              width={screenSize.width < 768 ? "200px" : "600px"}
               height={screenSize.width < 768 ? "200px" : "400px"}
               ringColor={ring}
               DiamondText={DiamondText}
@@ -481,9 +485,7 @@ function Landing() {
           </div>
 
           {/* Colors and Materials Below the Model */}
-
-          {/* Colors and Materials Below the Model */}
-          <div className="">
+          <div>
             {click === "gold" && <GoldComponent setRing={setRing} />}
             {click === "diamond" && (
               <DiamondComponent
