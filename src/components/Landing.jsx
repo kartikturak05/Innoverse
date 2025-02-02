@@ -450,17 +450,17 @@ function Landing() {
           </div>
 
 
-          <div className="flex justify-around w-full px-4 mt-2">
-            <div className="flex items-center bg-[#384241] rounded-full  w-fit max-w-sm sm:max-w-lg p-2 ">
+          <div className="flex md:flex-row flex-col justify-around w-full px-4 mt-2">
+            <div className="flex items-center bg-[#384241] rounded-full  w-auto max-w-sm sm:max-w-lg p-2 mb-2">
               <div
                 onClick={handleDemoClick}
-                className="bg-white text-gray-700 rounded-full px-10 py-4 sm:px-20 sm:py-2 outline-none focus:ring-2 focus:ring-blue-300 text-sm sm:text-lg text-center font-bold"
+                className="bg-white w-full text-gray-700 rounded-full px-10 py-4 sm:px-20 sm:py-2 outline-none focus:ring-2 focus:ring-blue-300 text-sm sm:text-lg text-center font-bold"
               >
                 BOOK A DEMO
               </div>
             </div>
             <p
-              className="text-lg sm:text-lg font-bold text-center pl-1 pr-1 pt-4 pb-4 rounded-full w-auto "
+              className="md:text-lg text-base font-bold text-center pl-1 pr-1 pt-4 pb-4 rounded-full w-auto "
               style={{
                 backgroundImage: "url('/d2.png')",
               }}
