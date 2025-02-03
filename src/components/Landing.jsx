@@ -423,21 +423,30 @@ function Landing() {
     >
       <div className="flex flex-col lg:flex-row items-center px-4 pt-20 sm:px-6 py-10 sm:py-20">
         {/* Left Section (60% Width on Large Screens) */}
-        <div className="w-full lg:w-3/5  px-4 lg:px-5 text-center rounded-full ">
+
+        <div
+          className="w-full lg:w-[63%] px-4 lg:px-5 text-center rounded-full flex flex-col justify-between"
+          style={{ height: "100%" }}
+        >
           <div
-            className="pt-5 pb-5 pl-1 pr-1 rounded-xl w-full lg:w-full"
+            className="pt-5 pb-1 pl-1 pr-1 rounded-xl w-full lg:w-full"
             style={{
-              backgroundImage: "url('/d2.png')",
+              backgroundImage: "url('/landing.jpg')",
+              backgroundSize: "cover",
+              height: "100%", // Ensure it takes full height of the parent
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "space-between", // Ensures the content spreads out
             }}
           >
-            <h1 className="text-black text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight sm:leading-none mt-7 sm:mt-7 text-center">
+            <h1 className="text-black text-3xl sm:text-4xl lg:text-4xl font-bold leading-tight sm:leading-none mt-5 sm:mt-7 text-center">
               Bringing Your Vision to Life With
             </h1>
 
-            <h1 className="text-black text-3xl sm:text-4xl lg:text-4xl font-semibold leading-tight sm:leading-none md:mt-3 sm:mt-7 mb-10">
+            <h1 className="text-black text-3xl sm:text-4xl lg:text-4xl font-bold leading-tight sm:leading-none md:mt-1 sm:mt-7 mb-10 font-sen">
               Stunning 3D Animation That Exceeds Expectations
             </h1>
-            <p className="text-black md:text-lg sm:text-sm font-normal leading-normal  mt-3 sm:mt-4 mb-5 sm:mb-6 w-full mx-auto">
+            <p className="text-black md:text-lg sm:text-sm  mt-3 sm:mt-4 md:mb-8 sm:mb-6 w-full mx-auto  font-sen text-lg font-normal  leading-7 text-justify  decoration-skip-none pl-4 pr-4">
               At Innoverrese we craft breathtaking 3D animations that go beyond
               expectations. From jaw-dropping product demos to heart-pounding
               action sequences, we bring your vision to life with
@@ -447,36 +456,31 @@ function Landing() {
               done—it’s perfected. Ready to create something extraordinary?
               Let’s push boundaries and exceed your wildest dreams.
             </p>
-          </div>
 
-
-          <div className="flex md:flex-row flex-col justify-around w-full px-4 mt-2">
-            <div className="flex items-center bg-[#384241] rounded-full  w-auto max-w-sm sm:max-w-lg p-2 mb-2">
-              <div
-                onClick={handleDemoClick}
-                className="bg-white w-full text-gray-700 rounded-full px-10 py-4 sm:px-20 sm:py-2 outline-none focus:ring-2 focus:ring-blue-300 text-sm sm:text-lg text-center font-bold"
-              >
-                BOOK A DEMO
+            {/* Content Positioned at the Bottom */}
+            <div className="flex flex-col md:flex-row w-full px-4 mt-auto">
+              <div className="flex items-center bg-[#4b5a58] rounded-full w-auto sm:max-w-lg p-2 mb-1 mt-2 sm:mr-7 justify-center">
+                <div
+                  onClick={handleDemoClick}
+                  className="bg-white w-full sm:w-auto text-gray-700 rounded-full md:px-16 py-3 sm:px-16 sm:py-2 outline-none focus:ring-2 focus:ring-blue-300 text-sm sm:text-lg text-center font-normal border-2 border-[#2f3836]"
+                >
+                  BOOK A DEMO
+                </div>
               </div>
+              <p className="md:text-lg text-base font-bold text-center pl-4 pr-1 pt-8 pb-4 w-full sm:w-auto">
+                🎥 Your Vision. Our Passion. Unforgettable Animation. 🎥 
+              </p>
             </div>
-            <p
-              className="md:text-lg text-base font-bold text-center pl-1 pr-1 pt-4 pb-4 rounded-full w-auto "
-              style={{
-                backgroundImage: "url('/d2.png')",
-              }}
-            >
-              🎥 Your Vision. Our Passion. Unforgettable Animation. 🎥
-            </p>
           </div>
         </div>
 
         {/* Right Section (40% Width on Large Screens) */}
-        <div className="w-full lg:w-2/5 flex flex-col justify-center items-center mt-20 lg:mt-0">
+        <div className="w-full lg:w-[30%] flex flex-col justify-center items-center mt-20 lg:mt-0">
           {/* 3D Model */}
-          <div className="mt-10">
+          <div className="mt-10 lg:ml-10">
             <FullSizeModel
               src={model}
-              width={screenSize.width < 768 ? "200px" : "600px"}
+              width={screenSize.width < 768 ? "200px" : "500px"}
               height={screenSize.width < 768 ? "200px" : "400px"}
               ringColor={ring}
               DiamondText={DiamondText}
