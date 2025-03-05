@@ -28,7 +28,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className={`${darkMode ? 'bg-gray-900' : 'bg-[#384241]'} text-white cursor-grab fixed w-full z-10`}>
+    <nav className={`${darkMode ? 'bg-gray-900' : 'bg-[#384241]'} text-white cursor-grab fixed w-full z-20`}>
       <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 sm:h-20">
           <div className="flex items-center">

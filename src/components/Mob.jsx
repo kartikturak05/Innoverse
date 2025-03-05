@@ -40,7 +40,7 @@ const Mob = () => {
 
 
     return (
-        <div className='bg-[#384241] text-white cursor-grab fixed w-full z-10 flex items-center justify-between h-16 sm:h-20' >
+        <div className='bg-[#384241] text-white cursor-grab fixed w-full z-20 flex items-center justify-between h-16 sm:h-20' >
             {/* Toggle Button */}
             <button className='z-[999] relative m-3  cursor-grab ' onClick={toggleDrawer}>
                 {isOpen ? <X /> : <Menu />}

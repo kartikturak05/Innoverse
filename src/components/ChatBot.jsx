@@ -229,13 +229,14 @@ const ChatBot = () => {
           <TfiHeadphoneAlt size={40} />
           
           {/* Sliding Text */}
-          <span
+          {isHovered ? ( <span
             className={`absolute right-16 w-36 h-14  bg-white px-7 py-3 text-black text-base transition-transform duration-300  rounded-full ${
-              isHovered ? "translate-x-0 opacity-100 " : "translate-x-10 opacity-0"
+              isHovered ? "translate-x-0" : "translate-x-36"
             }`}
           >
             Need Help?
-          </span>
+          </span>) : null}
+         
         </div>
       </div>
       )}
