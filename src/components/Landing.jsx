@@ -1,50 +1,40 @@
-import React, { useEffect, useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect, useRef } from "react";
 
 function Landing() {
-  const navigate = useNavigate();
   const videoRef = useRef(null);
-  const [screenSize, setScreenSize] = useState({
-    width: window.innerWidth,
-    height: window.innerHeight,
-  });
 
-  // Update screen size on resize
   useEffect(() => {
-    const handleResize = () => {
-      setScreenSize({
-        width: window.innerWidth,
-        height: window.innerHeight,
-      });
-    };
-
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
-
-  // Enable sound after user interaction
-  useEffect(() => {
-    const enableSound = () => {
+    // Try to play video with sound
+    const playVideoWithSound = () => {
       if (videoRef.current) {
         videoRef.current.muted = false;
         videoRef.current.play().catch((err) => console.log("Autoplay with sound failed:", err));
       }
     };
 
-    document.addEventListener("click", enableSound, { once: true });
+    // Ensure video starts immediately
+    if (videoRef.current) {
+      videoRef.current.play().catch(() => {
+        // If autoplay fails, wait for user interaction
+        document.addEventListener("click", playVideoWithSound, { once: true });
+        document.addEventListener("mouseover", playVideoWithSound, { once: true });
+      });
+    }
 
-    return () => document.removeEventListener("click", enableSound);
+    return () => document.removeEventListener("click", playVideoWithSound);
   }, []);
 
   return (
-    <div className="w-full md:min-h-screen sm:h-[800px] flex justify-center items-center bg-cover bg-center bg-no-repeat">
-      <div className="w-full sm:h-[800px] md:h-screen mt-10 md:mt-1">
+    <div className="w-full md:min-h-screen flex justify-center items-center bg-cover bg-center">
+      <div className="w-full md:h-screen mt-16 md:mt-10">
         <video
           ref={videoRef}
           autoPlay
           loop
-          className="w-full h-full object-cover"
+          muted={false} // Ensure sound is ON
+           preload="auto"
           controlsList="nodownload"
+          className="w-full h-full object-cover"
           style={{ pointerEvents: "auto" }}
           onContextMenu={(e) => e.preventDefault()}
         >
